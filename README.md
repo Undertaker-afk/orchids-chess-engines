@@ -3,6 +3,26 @@
 This repository contains the Trinity chess engine family.
 The active modular engine is built from ordered source modules in src/ into dist/Trinity-modular.js.
 
+## FrostTrainer
+
+This repo also includes `frostrainer/`, a portable CPU-only coaching harness.
+
+It complements the existing `coach-harness/` instead of replacing it:
+
+- `coach-harness/` is the live Trinity-vs-Stockfish web/API flow with periodic model feedback.
+- `frostrainer/` is an offline CLI trainer that reviews lost games, compares the student's move against a stronger coach move, and writes JSON/Markdown lesson reports.
+
+Quick start:
+
+```powershell
+npm run frostrainer -- `
+  --student trinity=dist/Trinity-modular.js `
+  --opponent baseline=Trinity-1.3.js `
+  --coach stockfish `
+  --games 4 `
+  --cycles 1
+```
+
 ## Modular Engine Development Workflow
 
 ### 1) Install dependencies
@@ -110,4 +130,5 @@ Suggested entry format:
 ## NPM Scripts
 
 - npm run build:engine
+- npm run frostrainer
 - npm run test:api
