@@ -77,8 +77,7 @@ export class MatchRunner extends EventEmitter {
 
         this.state.ply = ply;
         this.state.fen = board.fen();
-
-        fs.appendFileSync(path.join(this.outDir, "events.ndjson"), JSON.stringify(ev) + "\n", "utf8");
+        this.persistArtifacts();
 
         if (this.config.coachEnabled && ply % this.config.coachEveryNPlies === 0) {
           const insight = await requestCoachInsight({
@@ -88,7 +87,7 @@ export class MatchRunner extends EventEmitter {
             ply
           });
           this.state.insights.push(insight);
-          fs.appendFileSync(path.join(this.outDir, "coach.ndjson"), JSON.stringify(insight) + "\n", "utf8");
+          this.persistArtifacts();
         }
 
         if (board.isGameOver()) {
@@ -109,16 +108,22 @@ export class MatchRunner extends EventEmitter {
 
       this.state.endedAt = new Date().toISOString();
       this.emitUpdate();
-      fs.writeFileSync(path.join(this.outDir, "report.json"), JSON.stringify(this.state, null, 2), "utf8");
+      this.persistArtifacts();
     } catch (err: any) {
       this.state.status = "error";
       this.state.error = err?.message || String(err);
       this.state.endedAt = new Date().toISOString();
       this.emitUpdate();
-      fs.writeFileSync(path.join(this.outDir, "report.json"), JSON.stringify(this.state, null, 2), "utf8");
+      this.persistArtifacts();
     } finally {
       stockfish.stop();
     }
+  }
+
+  private persistArtifacts(): void {
+    fs.writeFileSync(path.join(this.outDir, "events.json"), JSON.stringify(this.state.moves, null, 2), "utf8");
+    fs.writeFileSync(path.join(this.outDir, "coach.json"), JSON.stringify(this.state.insights, null, 2), "utf8");
+    fs.writeFileSync(path.join(this.outDir, "report.json"), JSON.stringify(this.state, null, 2), "utf8");
   }
 
   private emitUpdate(): void {

@@ -1,0 +1,1338 @@
+{
+  "id": "0768304f-1a63-4f6a-8e30-ccb439f6bc11",
+  "status": "finished",
+  "fen": "8/8/p7/8/PP6/K1k4p/1q5n/8 w - - 4 61",
+  "ply": 120,
+  "result": "0-1",
+  "winner": "Stockfish",
+  "trinityMoves": [
+    "b1c3",
+    "e2e3",
+    "g1f3",
+    "d2d4",
+    "f1b5",
+    "e1g1",
+    "b5c6",
+    "f3e5",
+    "e5c6",
+    "d4c5",
+    "d1g4",
+    "g4g3",
+    "f1e1",
+    "g3e5",
+    "e3e4",
+    "c3d5",
+    "e5d4",
+    "e4d5",
+    "d5c6",
+    "c1e3",
+    "c6b7",
+    "e3d4",
+    "a1d1",
+    "c2c4",
+    "g2g3",
+    "d4c3",
+    "c3b4",
+    "c4c5",
+    "d1d2",
+    "b2b3",
+    "f2f3",
+    "e1e2",
+    "e2d2",
+    "g1f2",
+    "f2e3",
+    "e3d4",
+    "d2f2",
+    "d4e4",
+    "e4e3",
+    "e3e2",
+    "e2d2",
+    "f2e2",
+    "d2c2",
+    "c2b2",
+    "b2b1",
+    "g3f4",
+    "b1c2",
+    "e2d2",
+    "c2b1",
+    "b1c2",
+    "c2c3",
+    "c3d2",
+    "b3b4",
+    "d2e1",
+    "a2a4",
+    "e1d1",
+    "d1c1",
+    "c1b1",
+    "b1a2",
+    "a2a3"
+  ],
+  "stockfishMoves": [
+    "d7d5",
+    "c7c5",
+    "e7e6",
+    "b8c6",
+    "c8d7",
+    "a7a6",
+    "d7c6",
+    "d8c7",
+    "c7c6",
+    "f8c5",
+    "c5f8",
+    "h7h5",
+    "h5h4",
+    "a8d8",
+    "d5d4",
+    "f7f6",
+    "e6d5",
+    "e8f7",
+    "d8d4",
+    "d4c4",
+    "c4b4",
+    "b4b7",
+    "g8e7",
+    "h4h3",
+    "e7c6",
+    "f8b4",
+    "c6b4",
+    "h8c8",
+    "c8c5",
+    "b7c7",
+    "c5c2",
+    "c2d2",
+    "c7c3",
+    "b4d3",
+    "d3e5",
+    "c3c1",
+    "c1d1",
+    "f7e6",
+    "d1d3",
+    "d3c3",
+    "c3f3",
+    "g7g5",
+    "e6d5",
+    "f6f5",
+    "f5f4",
+    "g5f4",
+    "f3e3",
+    "d5e4",
+    "f4f3",
+    "e3e2",
+    "e2d2",
+    "e5g4",
+    "g4h2",
+    "e4e3",
+    "f3f2",
+    "e3d3",
+    "d3c3",
+    "f2f1q",
+    "f1f2",
+    "f2b2"
+  ],
+  "moves": [
+    {
+      "ply": 1,
+      "fenBefore": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "fenAfter": "rnbqkbnr/pppppppp/8/8/8/2N5/PPPPPPPP/R1BQKBNR b KQkq - 1 1",
+      "moveUci": "b1c3",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:37:32.176Z"
+    },
+    {
+      "ply": 2,
+      "fenBefore": "rnbqkbnr/pppppppp/8/8/8/2N5/PPPPPPPP/R1BQKBNR b KQkq - 1 1",
+      "fenAfter": "rnbqkbnr/ppp1pppp/8/3p4/8/2N5/PPPPPPPP/R1BQKBNR w KQkq - 0 2",
+      "moveUci": "d7d5",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:37:33.386Z"
+    },
+    {
+      "ply": 3,
+      "fenBefore": "rnbqkbnr/ppp1pppp/8/3p4/8/2N5/PPPPPPPP/R1BQKBNR w KQkq - 0 2",
+      "fenAfter": "rnbqkbnr/ppp1pppp/8/3p4/8/2N1P3/PPPP1PPP/R1BQKBNR b KQkq - 0 2",
+      "moveUci": "e2e3",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:37:34.656Z"
+    },
+    {
+      "ply": 4,
+      "fenBefore": "rnbqkbnr/ppp1pppp/8/3p4/8/2N1P3/PPPP1PPP/R1BQKBNR b KQkq - 0 2",
+      "fenAfter": "rnbqkbnr/pp2pppp/8/2pp4/8/2N1P3/PPPP1PPP/R1BQKBNR w KQkq - 0 3",
+      "moveUci": "c7c5",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:37:35.866Z"
+    },
+    {
+      "ply": 5,
+      "fenBefore": "rnbqkbnr/pp2pppp/8/2pp4/8/2N1P3/PPPP1PPP/R1BQKBNR w KQkq - 0 3",
+      "fenAfter": "rnbqkbnr/pp2pppp/8/2pp4/8/2N1PN2/PPPP1PPP/R1BQKB1R b KQkq - 1 3",
+      "moveUci": "g1f3",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:37:37.137Z"
+    },
+    {
+      "ply": 6,
+      "fenBefore": "rnbqkbnr/pp2pppp/8/2pp4/8/2N1PN2/PPPP1PPP/R1BQKB1R b KQkq - 1 3",
+      "fenAfter": "rnbqkbnr/pp3ppp/4p3/2pp4/8/2N1PN2/PPPP1PPP/R1BQKB1R w KQkq - 0 4",
+      "moveUci": "e7e6",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:38:16.312Z"
+    },
+    {
+      "ply": 7,
+      "fenBefore": "rnbqkbnr/pp3ppp/4p3/2pp4/8/2N1PN2/PPPP1PPP/R1BQKB1R w KQkq - 0 4",
+      "fenAfter": "rnbqkbnr/pp3ppp/4p3/2pp4/3P4/2N1PN2/PPP2PPP/R1BQKB1R b KQkq - 0 4",
+      "moveUci": "d2d4",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:38:17.580Z"
+    },
+    {
+      "ply": 8,
+      "fenBefore": "rnbqkbnr/pp3ppp/4p3/2pp4/3P4/2N1PN2/PPP2PPP/R1BQKB1R b KQkq - 0 4",
+      "fenAfter": "r1bqkbnr/pp3ppp/2n1p3/2pp4/3P4/2N1PN2/PPP2PPP/R1BQKB1R w KQkq - 1 5",
+      "moveUci": "b8c6",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:38:18.788Z"
+    },
+    {
+      "ply": 9,
+      "fenBefore": "r1bqkbnr/pp3ppp/2n1p3/2pp4/3P4/2N1PN2/PPP2PPP/R1BQKB1R w KQkq - 1 5",
+      "fenAfter": "r1bqkbnr/pp3ppp/2n1p3/1Bpp4/3P4/2N1PN2/PPP2PPP/R1BQK2R b KQkq - 2 5",
+      "moveUci": "f1b5",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:38:20.055Z"
+    },
+    {
+      "ply": 10,
+      "fenBefore": "r1bqkbnr/pp3ppp/2n1p3/1Bpp4/3P4/2N1PN2/PPP2PPP/R1BQK2R b KQkq - 2 5",
+      "fenAfter": "r2qkbnr/pp1b1ppp/2n1p3/1Bpp4/3P4/2N1PN2/PPP2PPP/R1BQK2R w KQkq - 3 6",
+      "moveUci": "c8d7",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:38:21.262Z"
+    },
+    {
+      "ply": 11,
+      "fenBefore": "r2qkbnr/pp1b1ppp/2n1p3/1Bpp4/3P4/2N1PN2/PPP2PPP/R1BQK2R w KQkq - 3 6",
+      "fenAfter": "r2qkbnr/pp1b1ppp/2n1p3/1Bpp4/3P4/2N1PN2/PPP2PPP/R1BQ1RK1 b kq - 4 6",
+      "moveUci": "e1g1",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:38:48.470Z"
+    },
+    {
+      "ply": 12,
+      "fenBefore": "r2qkbnr/pp1b1ppp/2n1p3/1Bpp4/3P4/2N1PN2/PPP2PPP/R1BQ1RK1 b kq - 4 6",
+      "fenAfter": "r2qkbnr/1p1b1ppp/p1n1p3/1Bpp4/3P4/2N1PN2/PPP2PPP/R1BQ1RK1 w kq - 0 7",
+      "moveUci": "a7a6",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:38:49.677Z"
+    },
+    {
+      "ply": 13,
+      "fenBefore": "r2qkbnr/1p1b1ppp/p1n1p3/1Bpp4/3P4/2N1PN2/PPP2PPP/R1BQ1RK1 w kq - 0 7",
+      "fenAfter": "r2qkbnr/1p1b1ppp/p1B1p3/2pp4/3P4/2N1PN2/PPP2PPP/R1BQ1RK1 b kq - 0 7",
+      "moveUci": "b5c6",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:38:50.938Z"
+    },
+    {
+      "ply": 14,
+      "fenBefore": "r2qkbnr/1p1b1ppp/p1B1p3/2pp4/3P4/2N1PN2/PPP2PPP/R1BQ1RK1 b kq - 0 7",
+      "fenAfter": "r2qkbnr/1p3ppp/p1b1p3/2pp4/3P4/2N1PN2/PPP2PPP/R1BQ1RK1 w kq - 0 8",
+      "moveUci": "d7c6",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:38:52.152Z"
+    },
+    {
+      "ply": 15,
+      "fenBefore": "r2qkbnr/1p3ppp/p1b1p3/2pp4/3P4/2N1PN2/PPP2PPP/R1BQ1RK1 w kq - 0 8",
+      "fenAfter": "r2qkbnr/1p3ppp/p1b1p3/2ppN3/3P4/2N1P3/PPP2PPP/R1BQ1RK1 b kq - 1 8",
+      "moveUci": "f3e5",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:38:53.412Z"
+    },
+    {
+      "ply": 16,
+      "fenBefore": "r2qkbnr/1p3ppp/p1b1p3/2ppN3/3P4/2N1P3/PPP2PPP/R1BQ1RK1 b kq - 1 8",
+      "fenAfter": "r3kbnr/1pq2ppp/p1b1p3/2ppN3/3P4/2N1P3/PPP2PPP/R1BQ1RK1 w kq - 2 9",
+      "moveUci": "d8c7",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:39:41.393Z"
+    },
+    {
+      "ply": 17,
+      "fenBefore": "r3kbnr/1pq2ppp/p1b1p3/2ppN3/3P4/2N1P3/PPP2PPP/R1BQ1RK1 w kq - 2 9",
+      "fenAfter": "r3kbnr/1pq2ppp/p1N1p3/2pp4/3P4/2N1P3/PPP2PPP/R1BQ1RK1 b kq - 0 9",
+      "moveUci": "e5c6",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:39:42.664Z"
+    },
+    {
+      "ply": 18,
+      "fenBefore": "r3kbnr/1pq2ppp/p1N1p3/2pp4/3P4/2N1P3/PPP2PPP/R1BQ1RK1 b kq - 0 9",
+      "fenAfter": "r3kbnr/1p3ppp/p1q1p3/2pp4/3P4/2N1P3/PPP2PPP/R1BQ1RK1 w kq - 0 10",
+      "moveUci": "c7c6",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:39:43.871Z"
+    },
+    {
+      "ply": 19,
+      "fenBefore": "r3kbnr/1p3ppp/p1q1p3/2pp4/3P4/2N1P3/PPP2PPP/R1BQ1RK1 w kq - 0 10",
+      "fenAfter": "r3kbnr/1p3ppp/p1q1p3/2Pp4/8/2N1P3/PPP2PPP/R1BQ1RK1 b kq - 0 10",
+      "moveUci": "d4c5",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:39:45.133Z"
+    },
+    {
+      "ply": 20,
+      "fenBefore": "r3kbnr/1p3ppp/p1q1p3/2Pp4/8/2N1P3/PPP2PPP/R1BQ1RK1 b kq - 0 10",
+      "fenAfter": "r3k1nr/1p3ppp/p1q1p3/2bp4/8/2N1P3/PPP2PPP/R1BQ1RK1 w kq - 0 11",
+      "moveUci": "f8c5",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:39:46.352Z"
+    },
+    {
+      "ply": 21,
+      "fenBefore": "r3k1nr/1p3ppp/p1q1p3/2bp4/8/2N1P3/PPP2PPP/R1BQ1RK1 w kq - 0 11",
+      "fenAfter": "r3k1nr/1p3ppp/p1q1p3/2bp4/6Q1/2N1P3/PPP2PPP/R1B2RK1 b kq - 1 11",
+      "moveUci": "d1g4",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:40:09.725Z"
+    },
+    {
+      "ply": 22,
+      "fenBefore": "r3k1nr/1p3ppp/p1q1p3/2bp4/6Q1/2N1P3/PPP2PPP/R1B2RK1 b kq - 1 11",
+      "fenAfter": "r3kbnr/1p3ppp/p1q1p3/3p4/6Q1/2N1P3/PPP2PPP/R1B2RK1 w kq - 2 12",
+      "moveUci": "c5f8",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:40:10.932Z"
+    },
+    {
+      "ply": 23,
+      "fenBefore": "r3kbnr/1p3ppp/p1q1p3/3p4/6Q1/2N1P3/PPP2PPP/R1B2RK1 w kq - 2 12",
+      "fenAfter": "r3kbnr/1p3ppp/p1q1p3/3p4/8/2N1P1Q1/PPP2PPP/R1B2RK1 b kq - 3 12",
+      "moveUci": "g4g3",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:40:12.204Z"
+    },
+    {
+      "ply": 24,
+      "fenBefore": "r3kbnr/1p3ppp/p1q1p3/3p4/8/2N1P1Q1/PPP2PPP/R1B2RK1 b kq - 3 12",
+      "fenAfter": "r3kbnr/1p3pp1/p1q1p3/3p3p/8/2N1P1Q1/PPP2PPP/R1B2RK1 w kq - 0 13",
+      "moveUci": "h7h5",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:40:13.412Z"
+    },
+    {
+      "ply": 25,
+      "fenBefore": "r3kbnr/1p3pp1/p1q1p3/3p3p/8/2N1P1Q1/PPP2PPP/R1B2RK1 w kq - 0 13",
+      "fenAfter": "r3kbnr/1p3pp1/p1q1p3/3p3p/8/2N1P1Q1/PPP2PPP/R1B1R1K1 b kq - 1 13",
+      "moveUci": "f1e1",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:40:14.708Z"
+    },
+    {
+      "ply": 26,
+      "fenBefore": "r3kbnr/1p3pp1/p1q1p3/3p3p/8/2N1P1Q1/PPP2PPP/R1B1R1K1 b kq - 1 13",
+      "fenAfter": "r3kbnr/1p3pp1/p1q1p3/3p4/7p/2N1P1Q1/PPP2PPP/R1B1R1K1 w kq - 0 14",
+      "moveUci": "h5h4",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:40:43.869Z"
+    },
+    {
+      "ply": 27,
+      "fenBefore": "r3kbnr/1p3pp1/p1q1p3/3p4/7p/2N1P1Q1/PPP2PPP/R1B1R1K1 w kq - 0 14",
+      "fenAfter": "r3kbnr/1p3pp1/p1q1p3/3pQ3/7p/2N1P3/PPP2PPP/R1B1R1K1 b kq - 1 14",
+      "moveUci": "g3e5",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:40:45.160Z"
+    },
+    {
+      "ply": 28,
+      "fenBefore": "r3kbnr/1p3pp1/p1q1p3/3pQ3/7p/2N1P3/PPP2PPP/R1B1R1K1 b kq - 1 14",
+      "fenAfter": "3rkbnr/1p3pp1/p1q1p3/3pQ3/7p/2N1P3/PPP2PPP/R1B1R1K1 w k - 2 15",
+      "moveUci": "a8d8",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:40:46.366Z"
+    },
+    {
+      "ply": 29,
+      "fenBefore": "3rkbnr/1p3pp1/p1q1p3/3pQ3/7p/2N1P3/PPP2PPP/R1B1R1K1 w k - 2 15",
+      "fenAfter": "3rkbnr/1p3pp1/p1q1p3/3pQ3/4P2p/2N5/PPP2PPP/R1B1R1K1 b k - 0 15",
+      "moveUci": "e3e4",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:40:47.631Z"
+    },
+    {
+      "ply": 30,
+      "fenBefore": "3rkbnr/1p3pp1/p1q1p3/3pQ3/4P2p/2N5/PPP2PPP/R1B1R1K1 b k - 0 15",
+      "fenAfter": "3rkbnr/1p3pp1/p1q1p3/4Q3/3pP2p/2N5/PPP2PPP/R1B1R1K1 w k - 0 16",
+      "moveUci": "d5d4",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:40:48.838Z"
+    },
+    {
+      "ply": 31,
+      "fenBefore": "3rkbnr/1p3pp1/p1q1p3/4Q3/3pP2p/2N5/PPP2PPP/R1B1R1K1 w k - 0 16",
+      "fenAfter": "3rkbnr/1p3pp1/p1q1p3/3NQ3/3pP2p/8/PPP2PPP/R1B1R1K1 b k - 1 16",
+      "moveUci": "c3d5",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:41:36.150Z"
+    },
+    {
+      "ply": 32,
+      "fenBefore": "3rkbnr/1p3pp1/p1q1p3/3NQ3/3pP2p/8/PPP2PPP/R1B1R1K1 b k - 1 16",
+      "fenAfter": "3rkbnr/1p4p1/p1q1pp2/3NQ3/3pP2p/8/PPP2PPP/R1B1R1K1 w k - 0 17",
+      "moveUci": "f7f6",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:41:37.357Z"
+    },
+    {
+      "ply": 33,
+      "fenBefore": "3rkbnr/1p4p1/p1q1pp2/3NQ3/3pP2p/8/PPP2PPP/R1B1R1K1 w k - 0 17",
+      "fenAfter": "3rkbnr/1p4p1/p1q1pp2/3N4/3QP2p/8/PPP2PPP/R1B1R1K1 b k - 0 17",
+      "moveUci": "e5d4",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:41:38.627Z"
+    },
+    {
+      "ply": 34,
+      "fenBefore": "3rkbnr/1p4p1/p1q1pp2/3N4/3QP2p/8/PPP2PPP/R1B1R1K1 b k - 0 17",
+      "fenAfter": "3rkbnr/1p4p1/p1q2p2/3p4/3QP2p/8/PPP2PPP/R1B1R1K1 w k - 0 18",
+      "moveUci": "e6d5",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:41:39.832Z"
+    },
+    {
+      "ply": 35,
+      "fenBefore": "3rkbnr/1p4p1/p1q2p2/3p4/3QP2p/8/PPP2PPP/R1B1R1K1 w k - 0 18",
+      "fenAfter": "3rkbnr/1p4p1/p1q2p2/3P4/3Q3p/8/PPP2PPP/R1B1R1K1 b k - 0 18",
+      "moveUci": "e4d5",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:41:41.103Z"
+    },
+    {
+      "ply": 36,
+      "fenBefore": "3rkbnr/1p4p1/p1q2p2/3P4/3Q3p/8/PPP2PPP/R1B1R1K1 b k - 0 18",
+      "fenAfter": "3r1bnr/1p3kp1/p1q2p2/3P4/3Q3p/8/PPP2PPP/R1B1R1K1 w - - 1 19",
+      "moveUci": "e8f7",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:41:49.661Z"
+    },
+    {
+      "ply": 37,
+      "fenBefore": "3r1bnr/1p3kp1/p1q2p2/3P4/3Q3p/8/PPP2PPP/R1B1R1K1 w - - 1 19",
+      "fenAfter": "3r1bnr/1p3kp1/p1P2p2/8/3Q3p/8/PPP2PPP/R1B1R1K1 b - - 0 19",
+      "moveUci": "d5c6",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:41:50.927Z"
+    },
+    {
+      "ply": 38,
+      "fenBefore": "3r1bnr/1p3kp1/p1P2p2/8/3Q3p/8/PPP2PPP/R1B1R1K1 b - - 0 19",
+      "fenAfter": "5bnr/1p3kp1/p1P2p2/8/3r3p/8/PPP2PPP/R1B1R1K1 w - - 0 20",
+      "moveUci": "d8d4",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:41:52.130Z"
+    },
+    {
+      "ply": 39,
+      "fenBefore": "5bnr/1p3kp1/p1P2p2/8/3r3p/8/PPP2PPP/R1B1R1K1 w - - 0 20",
+      "fenAfter": "5bnr/1p3kp1/p1P2p2/8/3r3p/4B3/PPP2PPP/R3R1K1 b - - 1 20",
+      "moveUci": "c1e3",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:41:53.393Z"
+    },
+    {
+      "ply": 40,
+      "fenBefore": "5bnr/1p3kp1/p1P2p2/8/3r3p/4B3/PPP2PPP/R3R1K1 b - - 1 20",
+      "fenAfter": "5bnr/1p3kp1/p1P2p2/8/2r4p/4B3/PPP2PPP/R3R1K1 w - - 2 21",
+      "moveUci": "d4c4",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:41:54.598Z"
+    },
+    {
+      "ply": 41,
+      "fenBefore": "5bnr/1p3kp1/p1P2p2/8/2r4p/4B3/PPP2PPP/R3R1K1 w - - 2 21",
+      "fenAfter": "5bnr/1P3kp1/p4p2/8/2r4p/4B3/PPP2PPP/R3R1K1 b - - 0 21",
+      "moveUci": "c6b7",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:42:01.336Z"
+    },
+    {
+      "ply": 42,
+      "fenBefore": "5bnr/1P3kp1/p4p2/8/2r4p/4B3/PPP2PPP/R3R1K1 b - - 0 21",
+      "fenAfter": "5bnr/1P3kp1/p4p2/8/1r5p/4B3/PPP2PPP/R3R1K1 w - - 1 22",
+      "moveUci": "c4b4",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:42:02.541Z"
+    },
+    {
+      "ply": 43,
+      "fenBefore": "5bnr/1P3kp1/p4p2/8/1r5p/4B3/PPP2PPP/R3R1K1 w - - 1 22",
+      "fenAfter": "5bnr/1P3kp1/p4p2/8/1r1B3p/8/PPP2PPP/R3R1K1 b - - 2 22",
+      "moveUci": "e3d4",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:42:03.810Z"
+    },
+    {
+      "ply": 44,
+      "fenBefore": "5bnr/1P3kp1/p4p2/8/1r1B3p/8/PPP2PPP/R3R1K1 b - - 2 22",
+      "fenAfter": "5bnr/1r3kp1/p4p2/8/3B3p/8/PPP2PPP/R3R1K1 w - - 0 23",
+      "moveUci": "b4b7",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:42:05.016Z"
+    },
+    {
+      "ply": 45,
+      "fenBefore": "5bnr/1r3kp1/p4p2/8/3B3p/8/PPP2PPP/R3R1K1 w - - 0 23",
+      "fenAfter": "5bnr/1r3kp1/p4p2/8/3B3p/8/PPP2PPP/3RR1K1 b - - 1 23",
+      "moveUci": "a1d1",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:42:06.294Z"
+    },
+    {
+      "ply": 46,
+      "fenBefore": "5bnr/1r3kp1/p4p2/8/3B3p/8/PPP2PPP/3RR1K1 b - - 1 23",
+      "fenAfter": "5b1r/1r2nkp1/p4p2/8/3B3p/8/PPP2PPP/3RR1K1 w - - 2 24",
+      "moveUci": "g8e7",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:42:37.669Z"
+    },
+    {
+      "ply": 47,
+      "fenBefore": "5b1r/1r2nkp1/p4p2/8/3B3p/8/PPP2PPP/3RR1K1 w - - 2 24",
+      "fenAfter": "5b1r/1r2nkp1/p4p2/8/2PB3p/8/PP3PPP/3RR1K1 b - - 0 24",
+      "moveUci": "c2c4",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:42:38.934Z"
+    },
+    {
+      "ply": 48,
+      "fenBefore": "5b1r/1r2nkp1/p4p2/8/2PB3p/8/PP3PPP/3RR1K1 b - - 0 24",
+      "fenAfter": "5b1r/1r2nkp1/p4p2/8/2PB4/7p/PP3PPP/3RR1K1 w - - 0 25",
+      "moveUci": "h4h3",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:42:40.139Z"
+    },
+    {
+      "ply": 49,
+      "fenBefore": "5b1r/1r2nkp1/p4p2/8/2PB4/7p/PP3PPP/3RR1K1 w - - 0 25",
+      "fenAfter": "5b1r/1r2nkp1/p4p2/8/2PB4/6Pp/PP3P1P/3RR1K1 b - - 0 25",
+      "moveUci": "g2g3",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:42:41.397Z"
+    },
+    {
+      "ply": 50,
+      "fenBefore": "5b1r/1r2nkp1/p4p2/8/2PB4/6Pp/PP3P1P/3RR1K1 b - - 0 25",
+      "fenAfter": "5b1r/1r3kp1/p1n2p2/8/2PB4/6Pp/PP3P1P/3RR1K1 w - - 1 26",
+      "moveUci": "e7c6",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:42:42.602Z"
+    },
+    {
+      "ply": 51,
+      "fenBefore": "5b1r/1r3kp1/p1n2p2/8/2PB4/6Pp/PP3P1P/3RR1K1 w - - 1 26",
+      "fenAfter": "5b1r/1r3kp1/p1n2p2/8/2P5/2B3Pp/PP3P1P/3RR1K1 b - - 2 26",
+      "moveUci": "d4c3",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:43:13.780Z"
+    },
+    {
+      "ply": 52,
+      "fenBefore": "5b1r/1r3kp1/p1n2p2/8/2P5/2B3Pp/PP3P1P/3RR1K1 b - - 2 26",
+      "fenAfter": "7r/1r3kp1/p1n2p2/8/1bP5/2B3Pp/PP3P1P/3RR1K1 w - - 3 27",
+      "moveUci": "f8b4",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:43:14.988Z"
+    },
+    {
+      "ply": 53,
+      "fenBefore": "7r/1r3kp1/p1n2p2/8/1bP5/2B3Pp/PP3P1P/3RR1K1 w - - 3 27",
+      "fenAfter": "7r/1r3kp1/p1n2p2/8/1BP5/6Pp/PP3P1P/3RR1K1 b - - 0 27",
+      "moveUci": "c3b4",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:43:16.251Z"
+    },
+    {
+      "ply": 54,
+      "fenBefore": "7r/1r3kp1/p1n2p2/8/1BP5/6Pp/PP3P1P/3RR1K1 b - - 0 27",
+      "fenAfter": "7r/1r3kp1/p4p2/8/1nP5/6Pp/PP3P1P/3RR1K1 w - - 0 28",
+      "moveUci": "c6b4",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:43:17.456Z"
+    },
+    {
+      "ply": 55,
+      "fenBefore": "7r/1r3kp1/p4p2/8/1nP5/6Pp/PP3P1P/3RR1K1 w - - 0 28",
+      "fenAfter": "7r/1r3kp1/p4p2/2P5/1n6/6Pp/PP3P1P/3RR1K1 b - - 0 28",
+      "moveUci": "c4c5",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:43:18.715Z"
+    },
+    {
+      "ply": 56,
+      "fenBefore": "7r/1r3kp1/p4p2/2P5/1n6/6Pp/PP3P1P/3RR1K1 b - - 0 28",
+      "fenAfter": "2r5/1r3kp1/p4p2/2P5/1n6/6Pp/PP3P1P/3RR1K1 w - - 1 29",
+      "moveUci": "h8c8",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:43:46.074Z"
+    },
+    {
+      "ply": 57,
+      "fenBefore": "2r5/1r3kp1/p4p2/2P5/1n6/6Pp/PP3P1P/3RR1K1 w - - 1 29",
+      "fenAfter": "2r5/1r3kp1/p4p2/2P5/1n6/6Pp/PP1R1P1P/4R1K1 b - - 2 29",
+      "moveUci": "d1d2",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:43:47.361Z"
+    },
+    {
+      "ply": 58,
+      "fenBefore": "2r5/1r3kp1/p4p2/2P5/1n6/6Pp/PP1R1P1P/4R1K1 b - - 2 29",
+      "fenAfter": "8/1r3kp1/p4p2/2r5/1n6/6Pp/PP1R1P1P/4R1K1 w - - 0 30",
+      "moveUci": "c8c5",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:43:48.568Z"
+    },
+    {
+      "ply": 59,
+      "fenBefore": "8/1r3kp1/p4p2/2r5/1n6/6Pp/PP1R1P1P/4R1K1 w - - 0 30",
+      "fenAfter": "8/1r3kp1/p4p2/2r5/1n6/1P4Pp/P2R1P1P/4R1K1 b - - 0 30",
+      "moveUci": "b2b3",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:43:49.831Z"
+    },
+    {
+      "ply": 60,
+      "fenBefore": "8/1r3kp1/p4p2/2r5/1n6/1P4Pp/P2R1P1P/4R1K1 b - - 0 30",
+      "fenAfter": "8/2r2kp1/p4p2/2r5/1n6/1P4Pp/P2R1P1P/4R1K1 w - - 1 31",
+      "moveUci": "b7c7",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:43:51.036Z"
+    },
+    {
+      "ply": 61,
+      "fenBefore": "8/2r2kp1/p4p2/2r5/1n6/1P4Pp/P2R1P1P/4R1K1 w - - 1 31",
+      "fenAfter": "8/2r2kp1/p4p2/2r5/1n6/1P3PPp/P2R3P/4R1K1 b - - 0 31",
+      "moveUci": "f2f3",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:45:02.913Z"
+    },
+    {
+      "ply": 62,
+      "fenBefore": "8/2r2kp1/p4p2/2r5/1n6/1P3PPp/P2R3P/4R1K1 b - - 0 31",
+      "fenAfter": "8/2r2kp1/p4p2/8/1n6/1P3PPp/P1rR3P/4R1K1 w - - 1 32",
+      "moveUci": "c5c2",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:45:04.118Z"
+    },
+    {
+      "ply": 63,
+      "fenBefore": "8/2r2kp1/p4p2/8/1n6/1P3PPp/P1rR3P/4R1K1 w - - 1 32",
+      "fenAfter": "8/2r2kp1/p4p2/8/1n6/1P3PPp/P1rRR2P/6K1 b - - 2 32",
+      "moveUci": "e1e2",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:45:05.402Z"
+    },
+    {
+      "ply": 64,
+      "fenBefore": "8/2r2kp1/p4p2/8/1n6/1P3PPp/P1rRR2P/6K1 b - - 2 32",
+      "fenAfter": "8/2r2kp1/p4p2/8/1n6/1P3PPp/P2rR2P/6K1 w - - 0 33",
+      "moveUci": "c2d2",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:45:06.608Z"
+    },
+    {
+      "ply": 65,
+      "fenBefore": "8/2r2kp1/p4p2/8/1n6/1P3PPp/P2rR2P/6K1 w - - 0 33",
+      "fenAfter": "8/2r2kp1/p4p2/8/1n6/1P3PPp/P2R3P/6K1 b - - 0 33",
+      "moveUci": "e2d2",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:45:07.875Z"
+    },
+    {
+      "ply": 66,
+      "fenBefore": "8/2r2kp1/p4p2/8/1n6/1P3PPp/P2R3P/6K1 b - - 0 33",
+      "fenAfter": "8/5kp1/p4p2/8/1n6/1Pr2PPp/P2R3P/6K1 w - - 1 34",
+      "moveUci": "c7c3",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:45:43.450Z"
+    },
+    {
+      "ply": 67,
+      "fenBefore": "8/5kp1/p4p2/8/1n6/1Pr2PPp/P2R3P/6K1 w - - 1 34",
+      "fenAfter": "8/5kp1/p4p2/8/1n6/1Pr2PPp/P2R1K1P/8 b - - 2 34",
+      "moveUci": "g1f2",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:45:44.722Z"
+    },
+    {
+      "ply": 68,
+      "fenBefore": "8/5kp1/p4p2/8/1n6/1Pr2PPp/P2R1K1P/8 b - - 2 34",
+      "fenAfter": "8/5kp1/p4p2/8/8/1Prn1PPp/P2R1K1P/8 w - - 3 35",
+      "moveUci": "b4d3",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:45:45.925Z"
+    },
+    {
+      "ply": 69,
+      "fenBefore": "8/5kp1/p4p2/8/8/1Prn1PPp/P2R1K1P/8 w - - 3 35",
+      "fenAfter": "8/5kp1/p4p2/8/8/1PrnKPPp/P2R3P/8 b - - 4 35",
+      "moveUci": "f2e3",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:45:47.191Z"
+    },
+    {
+      "ply": 70,
+      "fenBefore": "8/5kp1/p4p2/8/8/1PrnKPPp/P2R3P/8 b - - 4 35",
+      "fenAfter": "8/5kp1/p4p2/4n3/8/1Pr1KPPp/P2R3P/8 w - - 5 36",
+      "moveUci": "d3e5",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:45:48.396Z"
+    },
+    {
+      "ply": 71,
+      "fenBefore": "8/5kp1/p4p2/4n3/8/1Pr1KPPp/P2R3P/8 w - - 5 36",
+      "fenAfter": "8/5kp1/p4p2/4n3/3K4/1Pr2PPp/P2R3P/8 b - - 6 36",
+      "moveUci": "e3d4",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:46:11.331Z"
+    },
+    {
+      "ply": 72,
+      "fenBefore": "8/5kp1/p4p2/4n3/3K4/1Pr2PPp/P2R3P/8 b - - 6 36",
+      "fenAfter": "8/5kp1/p4p2/4n3/3K4/1P3PPp/P2R3P/2r5 w - - 7 37",
+      "moveUci": "c3c1",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:46:12.536Z"
+    },
+    {
+      "ply": 73,
+      "fenBefore": "8/5kp1/p4p2/4n3/3K4/1P3PPp/P2R3P/2r5 w - - 7 37",
+      "fenAfter": "8/5kp1/p4p2/4n3/3K4/1P3PPp/P4R1P/2r5 b - - 8 37",
+      "moveUci": "d2f2",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:46:13.802Z"
+    },
+    {
+      "ply": 74,
+      "fenBefore": "8/5kp1/p4p2/4n3/3K4/1P3PPp/P4R1P/2r5 b - - 8 37",
+      "fenAfter": "8/5kp1/p4p2/4n3/3K4/1P3PPp/P4R1P/3r4 w - - 9 38",
+      "moveUci": "c1d1",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:46:15.006Z"
+    },
+    {
+      "ply": 75,
+      "fenBefore": "8/5kp1/p4p2/4n3/3K4/1P3PPp/P4R1P/3r4 w - - 9 38",
+      "fenAfter": "8/5kp1/p4p2/4n3/4K3/1P3PPp/P4R1P/3r4 b - - 10 38",
+      "moveUci": "d4e4",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:46:16.275Z"
+    },
+    {
+      "ply": 76,
+      "fenBefore": "8/5kp1/p4p2/4n3/4K3/1P3PPp/P4R1P/3r4 b - - 10 38",
+      "fenAfter": "8/6p1/p3kp2/4n3/4K3/1P3PPp/P4R1P/3r4 w - - 11 39",
+      "moveUci": "f7e6",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:46:23.440Z"
+    },
+    {
+      "ply": 77,
+      "fenBefore": "8/6p1/p3kp2/4n3/4K3/1P3PPp/P4R1P/3r4 w - - 11 39",
+      "fenAfter": "8/6p1/p3kp2/4n3/8/1P2KPPp/P4R1P/3r4 b - - 12 39",
+      "moveUci": "e4e3",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:46:24.699Z"
+    },
+    {
+      "ply": 78,
+      "fenBefore": "8/6p1/p3kp2/4n3/8/1P2KPPp/P4R1P/3r4 b - - 12 39",
+      "fenAfter": "8/6p1/p3kp2/4n3/8/1P1rKPPp/P4R1P/8 w - - 13 40",
+      "moveUci": "d1d3",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:46:25.903Z"
+    },
+    {
+      "ply": 79,
+      "fenBefore": "8/6p1/p3kp2/4n3/8/1P1rKPPp/P4R1P/8 w - - 13 40",
+      "fenAfter": "8/6p1/p3kp2/4n3/8/1P1r1PPp/P3KR1P/8 b - - 14 40",
+      "moveUci": "e3e2",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:46:27.167Z"
+    },
+    {
+      "ply": 80,
+      "fenBefore": "8/6p1/p3kp2/4n3/8/1P1r1PPp/P3KR1P/8 b - - 14 40",
+      "fenAfter": "8/6p1/p3kp2/4n3/8/1Pr2PPp/P3KR1P/8 w - - 15 41",
+      "moveUci": "d3c3",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:46:28.371Z"
+    },
+    {
+      "ply": 81,
+      "fenBefore": "8/6p1/p3kp2/4n3/8/1Pr2PPp/P3KR1P/8 w - - 15 41",
+      "fenAfter": "8/6p1/p3kp2/4n3/8/1Pr2PPp/P2K1R1P/8 b - - 16 41",
+      "moveUci": "e2d2",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:47:00.405Z"
+    },
+    {
+      "ply": 82,
+      "fenBefore": "8/6p1/p3kp2/4n3/8/1Pr2PPp/P2K1R1P/8 b - - 16 41",
+      "fenAfter": "8/6p1/p3kp2/4n3/8/1P3rPp/P2K1R1P/8 w - - 0 42",
+      "moveUci": "c3f3",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:47:01.607Z"
+    },
+    {
+      "ply": 83,
+      "fenBefore": "8/6p1/p3kp2/4n3/8/1P3rPp/P2K1R1P/8 w - - 0 42",
+      "fenAfter": "8/6p1/p3kp2/4n3/8/1P3rPp/P2KR2P/8 b - - 1 42",
+      "moveUci": "f2e2",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:47:02.856Z"
+    },
+    {
+      "ply": 84,
+      "fenBefore": "8/6p1/p3kp2/4n3/8/1P3rPp/P2KR2P/8 b - - 1 42",
+      "fenAfter": "8/8/p3kp2/4n1p1/8/1P3rPp/P2KR2P/8 w - - 0 43",
+      "moveUci": "g7g5",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:47:04.057Z"
+    },
+    {
+      "ply": 85,
+      "fenBefore": "8/8/p3kp2/4n1p1/8/1P3rPp/P2KR2P/8 w - - 0 43",
+      "fenAfter": "8/8/p3kp2/4n1p1/8/1P3rPp/P1K1R2P/8 b - - 1 43",
+      "moveUci": "d2c2",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:47:05.315Z"
+    },
+    {
+      "ply": 86,
+      "fenBefore": "8/8/p3kp2/4n1p1/8/1P3rPp/P1K1R2P/8 b - - 1 43",
+      "fenAfter": "8/8/p4p2/3kn1p1/8/1P3rPp/P1K1R2P/8 w - - 2 44",
+      "moveUci": "e6d5",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:47:17.214Z"
+    },
+    {
+      "ply": 87,
+      "fenBefore": "8/8/p4p2/3kn1p1/8/1P3rPp/P1K1R2P/8 w - - 2 44",
+      "fenAfter": "8/8/p4p2/3kn1p1/8/1P3rPp/PK2R2P/8 b - - 3 44",
+      "moveUci": "c2b2",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:47:18.482Z"
+    },
+    {
+      "ply": 88,
+      "fenBefore": "8/8/p4p2/3kn1p1/8/1P3rPp/PK2R2P/8 b - - 3 44",
+      "fenAfter": "8/8/p7/3knpp1/8/1P3rPp/PK2R2P/8 w - - 0 45",
+      "moveUci": "f6f5",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:47:19.685Z"
+    },
+    {
+      "ply": 89,
+      "fenBefore": "8/8/p7/3knpp1/8/1P3rPp/PK2R2P/8 w - - 0 45",
+      "fenAfter": "8/8/p7/3knpp1/8/1P3rPp/P3R2P/1K6 b - - 1 45",
+      "moveUci": "b2b1",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:47:20.945Z"
+    },
+    {
+      "ply": 90,
+      "fenBefore": "8/8/p7/3knpp1/8/1P3rPp/P3R2P/1K6 b - - 1 45",
+      "fenAfter": "8/8/p7/3kn1p1/5p2/1P3rPp/P3R2P/1K6 w - - 0 46",
+      "moveUci": "f5f4",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:47:22.149Z"
+    },
+    {
+      "ply": 91,
+      "fenBefore": "8/8/p7/3kn1p1/5p2/1P3rPp/P3R2P/1K6 w - - 0 46",
+      "fenAfter": "8/8/p7/3kn1p1/5P2/1P3r1p/P3R2P/1K6 b - - 0 46",
+      "moveUci": "g3f4",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:47:57.313Z"
+    },
+    {
+      "ply": 92,
+      "fenBefore": "8/8/p7/3kn1p1/5P2/1P3r1p/P3R2P/1K6 b - - 0 46",
+      "fenAfter": "8/8/p7/3kn3/5p2/1P3r1p/P3R2P/1K6 w - - 0 47",
+      "moveUci": "g5f4",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:47:58.517Z"
+    },
+    {
+      "ply": 93,
+      "fenBefore": "8/8/p7/3kn3/5p2/1P3r1p/P3R2P/1K6 w - - 0 47",
+      "fenAfter": "8/8/p7/3kn3/5p2/1P3r1p/P1K1R2P/8 b - - 1 47",
+      "moveUci": "b1c2",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:47:59.779Z"
+    },
+    {
+      "ply": 94,
+      "fenBefore": "8/8/p7/3kn3/5p2/1P3r1p/P1K1R2P/8 b - - 1 47",
+      "fenAfter": "8/8/p7/3kn3/5p2/1P2r2p/P1K1R2P/8 w - - 2 48",
+      "moveUci": "f3e3",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:48:00.981Z"
+    },
+    {
+      "ply": 95,
+      "fenBefore": "8/8/p7/3kn3/5p2/1P2r2p/P1K1R2P/8 w - - 2 48",
+      "fenAfter": "8/8/p7/3kn3/5p2/1P2r2p/P1KR3P/8 b - - 3 48",
+      "moveUci": "e2d2",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:48:02.262Z"
+    },
+    {
+      "ply": 96,
+      "fenBefore": "8/8/p7/3kn3/5p2/1P2r2p/P1KR3P/8 b - - 3 48",
+      "fenAfter": "8/8/p7/4n3/4kp2/1P2r2p/P1KR3P/8 w - - 4 49",
+      "moveUci": "d5e4",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:48:58.572Z"
+    },
+    {
+      "ply": 97,
+      "fenBefore": "8/8/p7/4n3/4kp2/1P2r2p/P1KR3P/8 w - - 4 49",
+      "fenAfter": "8/8/p7/4n3/4kp2/1P2r2p/P2R3P/1K6 b - - 5 49",
+      "moveUci": "c2b1",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:48:59.825Z"
+    },
+    {
+      "ply": 98,
+      "fenBefore": "8/8/p7/4n3/4kp2/1P2r2p/P2R3P/1K6 b - - 5 49",
+      "fenAfter": "8/8/p7/4n3/4k3/1P2rp1p/P2R3P/1K6 w - - 0 50",
+      "moveUci": "f4f3",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:49:01.026Z"
+    },
+    {
+      "ply": 99,
+      "fenBefore": "8/8/p7/4n3/4k3/1P2rp1p/P2R3P/1K6 w - - 0 50",
+      "fenAfter": "8/8/p7/4n3/4k3/1P2rp1p/P1KR3P/8 b - - 1 50",
+      "moveUci": "b1c2",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:49:02.277Z"
+    },
+    {
+      "ply": 100,
+      "fenBefore": "8/8/p7/4n3/4k3/1P2rp1p/P1KR3P/8 b - - 1 50",
+      "fenAfter": "8/8/p7/4n3/4k3/1P3p1p/P1KRr2P/8 w - - 2 51",
+      "moveUci": "e3e2",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:49:03.479Z"
+    },
+    {
+      "ply": 101,
+      "fenBefore": "8/8/p7/4n3/4k3/1P3p1p/P1KRr2P/8 w - - 2 51",
+      "fenAfter": "8/8/p7/4n3/4k3/1PK2p1p/P2Rr2P/8 b - - 3 51",
+      "moveUci": "c2c3",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:49:12.731Z"
+    },
+    {
+      "ply": 102,
+      "fenBefore": "8/8/p7/4n3/4k3/1PK2p1p/P2Rr2P/8 b - - 3 51",
+      "fenAfter": "8/8/p7/4n3/4k3/1PK2p1p/P2r3P/8 w - - 0 52",
+      "moveUci": "e2d2",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:49:13.934Z"
+    },
+    {
+      "ply": 103,
+      "fenBefore": "8/8/p7/4n3/4k3/1PK2p1p/P2r3P/8 w - - 0 52",
+      "fenAfter": "8/8/p7/4n3/4k3/1P3p1p/P2K3P/8 b - - 0 52",
+      "moveUci": "c3d2",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:49:15.186Z"
+    },
+    {
+      "ply": 104,
+      "fenBefore": "8/8/p7/4n3/4k3/1P3p1p/P2K3P/8 b - - 0 52",
+      "fenAfter": "8/8/p7/8/4k1n1/1P3p1p/P2K3P/8 w - - 1 53",
+      "moveUci": "e5g4",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:49:16.387Z"
+    },
+    {
+      "ply": 105,
+      "fenBefore": "8/8/p7/8/4k1n1/1P3p1p/P2K3P/8 w - - 1 53",
+      "fenAfter": "8/8/p7/8/1P2k1n1/5p1p/P2K3P/8 b - - 0 53",
+      "moveUci": "b3b4",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:49:17.638Z"
+    },
+    {
+      "ply": 106,
+      "fenBefore": "8/8/p7/8/1P2k1n1/5p1p/P2K3P/8 b - - 0 53",
+      "fenAfter": "8/8/p7/8/1P2k3/5p1p/P2K3n/8 w - - 0 54",
+      "moveUci": "g4h2",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:49:49.474Z"
+    },
+    {
+      "ply": 107,
+      "fenBefore": "8/8/p7/8/1P2k3/5p1p/P2K3n/8 w - - 0 54",
+      "fenAfter": "8/8/p7/8/1P2k3/5p1p/P6n/4K3 b - - 1 54",
+      "moveUci": "d2e1",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:49:50.739Z"
+    },
+    {
+      "ply": 108,
+      "fenBefore": "8/8/p7/8/1P2k3/5p1p/P6n/4K3 b - - 1 54",
+      "fenAfter": "8/8/p7/8/1P6/4kp1p/P6n/4K3 w - - 2 55",
+      "moveUci": "e4e3",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:49:51.940Z"
+    },
+    {
+      "ply": 109,
+      "fenBefore": "8/8/p7/8/1P6/4kp1p/P6n/4K3 w - - 2 55",
+      "fenAfter": "8/8/p7/8/PP6/4kp1p/7n/4K3 b - - 0 55",
+      "moveUci": "a2a4",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:49:53.200Z"
+    },
+    {
+      "ply": 110,
+      "fenBefore": "8/8/p7/8/PP6/4kp1p/7n/4K3 b - - 0 55",
+      "fenAfter": "8/8/p7/8/PP6/4k2p/5p1n/4K3 w - - 0 56",
+      "moveUci": "f3f2",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:49:54.402Z"
+    },
+    {
+      "ply": 111,
+      "fenBefore": "8/8/p7/8/PP6/4k2p/5p1n/4K3 w - - 0 56",
+      "fenAfter": "8/8/p7/8/PP6/4k2p/5p1n/3K4 b - - 1 56",
+      "moveUci": "e1d1",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:50:17.800Z"
+    },
+    {
+      "ply": 112,
+      "fenBefore": "8/8/p7/8/PP6/4k2p/5p1n/3K4 b - - 1 56",
+      "fenAfter": "8/8/p7/8/PP6/3k3p/5p1n/3K4 w - - 2 57",
+      "moveUci": "e3d3",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:50:19.002Z"
+    },
+    {
+      "ply": 113,
+      "fenBefore": "8/8/p7/8/PP6/3k3p/5p1n/3K4 w - - 2 57",
+      "fenAfter": "8/8/p7/8/PP6/3k3p/5p1n/2K5 b - - 3 57",
+      "moveUci": "d1c1",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:50:20.267Z"
+    },
+    {
+      "ply": 114,
+      "fenBefore": "8/8/p7/8/PP6/3k3p/5p1n/2K5 b - - 3 57",
+      "fenAfter": "8/8/p7/8/PP6/2k4p/5p1n/2K5 w - - 4 58",
+      "moveUci": "d3c3",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:50:20.312Z"
+    },
+    {
+      "ply": 115,
+      "fenBefore": "8/8/p7/8/PP6/2k4p/5p1n/2K5 w - - 4 58",
+      "fenAfter": "8/8/p7/8/PP6/2k4p/5p1n/1K6 b - - 5 58",
+      "moveUci": "c1b1",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:50:21.582Z"
+    },
+    {
+      "ply": 116,
+      "fenBefore": "8/8/p7/8/PP6/2k4p/5p1n/1K6 b - - 5 58",
+      "fenAfter": "8/8/p7/8/PP6/2k4p/7n/1K3q2 w - - 0 59",
+      "moveUci": "f2f1q",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:50:54.957Z"
+    },
+    {
+      "ply": 117,
+      "fenBefore": "8/8/p7/8/PP6/2k4p/7n/1K3q2 w - - 0 59",
+      "fenAfter": "8/8/p7/8/PP6/2k4p/K6n/5q2 b - - 1 59",
+      "moveUci": "b1a2",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:50:56.243Z"
+    },
+    {
+      "ply": 118,
+      "fenBefore": "8/8/p7/8/PP6/2k4p/K6n/5q2 b - - 1 59",
+      "fenAfter": "8/8/p7/8/PP6/2k4p/K4q1n/8 w - - 2 60",
+      "moveUci": "f1f2",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:50:56.275Z"
+    },
+    {
+      "ply": 119,
+      "fenBefore": "8/8/p7/8/PP6/2k4p/K4q1n/8 w - - 2 60",
+      "fenAfter": "8/8/p7/8/PP6/K1k4p/5q1n/8 b - - 3 60",
+      "moveUci": "a2a3",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T14:50:56.339Z"
+    },
+    {
+      "ply": 120,
+      "fenBefore": "8/8/p7/8/PP6/K1k4p/5q1n/8 b - - 3 60",
+      "fenAfter": "8/8/p7/8/PP6/K1k4p/1q5n/8 w - - 4 61",
+      "moveUci": "f2b2",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T14:50:56.374Z"
+    }
+  ],
+  "insights": [
+    {
+      "ply": 5,
+      "timestamp": "2026-04-15T14:38:15.101Z",
+      "summary": "**1) Style notes**\n- Both sides played sound, development-focused moves\n- Trinity prioritized piece development (Nc3, Nf3) over pawn moves\n- 2.e3 is solid but blocks the queen and light-squared bishop—passive placement\n- Black's center pawns (d5, c5) give them slightly easier development\n\n**2) Tactical warning**\n- No immediate tactical threats to either side\n- However, the position is roughly equal—need to stay alert for any missteps\n\n**3) One concrete tuning idea**\n- Consider weighting **central control** more in evaluation\n- After 2...c5, White could have played 3.d4! directly challenging Black's center—this is a common pattern the engine may be underexploring compared to pure development moves\n- This could help Trinity identify more combative candidate moves in similar positions"
+    },
+    {
+      "ply": 10,
+      "timestamp": "2026-04-15T14:38:47.198Z",
+      "summary": "1) **Style notes**\n- ✅ Solid opening principles: piece development, central control, kingside castling prep\n- ⚠️ Played a textbook Ruy Lopez setup—correct but somewhat predictable; you may want more individuality against lower-rated opponents\n- ⚠️ Moved the b1-knight before the f1-bishop—fine, but f1-b5 is the only real point of the opening; deviation here wastes tempo\n\n2) **Tactical warning**\n- **c4 is a hanging pawn after c5xd4 and d4xc5.** If Black plays ...cxd4, ...Nxc5, you must recapture correctly. The position after 7.d4 gave Black free \"free\" central counterplay with ...c5. Consider whether 7.c3 (Capablanca's move) or an immediate exchange on c6 (Bxc6) better stabilizes the center.\n\n3) **Concrete tuning idea**\n- **Search deeper on positions where you have a pawn advance that \"gives away\" the center.** Your engine spent ~2 plies between d2-d4 (ply 7) and f1-b5 (ply 9) without checking the forcing Bxc6 exchange. Consider a search parameter that raises the threshold for evaluating \"free pawn\" central moves—perhaps a small bonus for *controlling* the center squares before occupying them, which could have flagged 7.c3 or Bxc6 as more precise than a direct d4 advance into Black's counter."
+    },
+    {
+      "ply": 15,
+      "timestamp": "2026-04-15T14:39:40.186Z",
+      "summary": "1) **Style notes**\n- Aggressive, development-first approach prioritizing piece activity over material\n- Knights aimed at the black king: Nxe5 creates persistent threats around f7/kingside\n- Willing to trade bishop for knight (Bb5xc6) to open lines and target weaknesses\n- Avoids \"book move\" passivity; plays dynamically after each of Stockfish's replies\n\n2) **Tactical warning**\n- After 15...Nxe5 16.dxe5, **Ng4** becomes a serious threat — the knight can jump to f6 or h4, attacking the e6 pawn and exposing the black king further. If Stockfish doesn't recapture on e5 immediately, search deep for knight jump patterns that could become forced wins.\n\n3) **Concrete tuning idea**\n- Increase search depth or add a bonus for **\"knight near castled king\"** evaluations. Current lines may underweight the long-term positional debt created when black's king must stay castled while white knights keep jumping into threatening squares. Consider a small LMR (late move reduction) adjustment to avoid cutting off Nxe5 lines prematurely."
+    },
+    {
+      "ply": 20,
+      "timestamp": "2026-04-15T14:40:08.461Z",
+      "summary": "## Coaching Feedback After Ply 20\n\n### 1) Style Notes\n- **Over-simplification tendency**: You're trading into a cramped, inferior endgame (Black has better bishop, weak White c-pawn on open file, exposed king)\n- **No coordination with castled king**: Moves 15-19 send pieces forward while your king sits in a partially weakened castle (h3 weakens g3, pawns disrupted)\n- **Materialistic but passive**: Gained queen exchange but ceded the e5 outpost and allowed Black's bishops to coordinate\n\n### 2) Tactical Warning\n- **Open c-file is dangerous** — Black's queen can return via c7 or b6 to target c2 and c3; your c-pawn is isolated with no defenders after Nxc6\n- **Missing piece activity**: You gave up the bishop pair and let Black's bishops become active; c5-bishop may target f2 or your weak light squares\n\n### 3) Tuning Idea\n**Adjust positional weights for king safety and pawn structure**. Your engine seems to undervalue:\n- Exposed king after trades (weight `king_shelter` higher)\n- Isolani/doubled pawn risks (weight `passed_pawn` vs `backward_pawn`)\n\nTry increasing `positional_weights` for `king_safety` by 15-20% to discourage these trades when the king is still castled and structure suffers."
+    },
+    {
+      "ply": 25,
+      "timestamp": "2026-04-15T14:40:42.660Z",
+      "summary": "**Coaching Feedback - Ply 25**\n\n**1) Style notes**\n- **Over-activating pieces early**: White moved the queen to g3 (move 23) before completing development. This exposed the queen and gave black easy targets (h5 pawn push).\n- **Principle violation**: Move 13...b5-c6 - Black captured with the queen instead of developing pieces. Capturing toward the center with a developed piece is fine, but the queen shouldn't be doing this.\n- **Inconsistent pawn breaks**: White played 19.d4-c5 to challenge the center, but earlier declined e3-e4 opportunities. Commit to one plan.\n\n**2) Tactical warning**\n- **Move 25 Re1 is suspicious**: After Stockfish's 24...h7-h5, bringing the rook to e1 does nothing active. The rook belongs on f1 or g1 to pressure the kingside or defend against potential ...h4 threats. This move also blocks the bishop on c1.\n\n**3) Tuning idea**\n- **Search depth for move 24**: The engine should explore 24...h5 more deeply. This move creates immediate threats (like ...h4) and forces White to react. Increase depth by 2-3 plies when the opponent makes a \"probing\" pawn move near your king."
+    },
+    {
+      "ply": 30,
+      "timestamp": "2026-04-15T14:41:34.878Z",
+      "summary": "**1) Style notes**\n- **Patient positional accumulation**: You methodically improve pieces after each trade (Nc6, Qg3, Rae1, Ne5). This is disciplined.\n- **Slow development of initiative**: You're converting a small edge into a lasting bind rather than playing for a quick kill. This suits engine-friendly positions.\n- **Underutilizing the e5 knight**: The Nd5 route was available after Qg3—revisiting strong outpost plans before committing to other squares often yields free accuracy.\n- **Missed direct threats**: Your queen excursions (Qg3) exposed your king briefly; ensure you verify opponent's counterplay before committing to non-essential moves.\n\n**2) Tactical warning**\n- After 24...h5-h4, your h-pawn is now a fixed weakness. Black can target it with ...Rg8 and ...g5-g4, turning it into a tactical vulnerability.\n- The advance 29.e3-e4 (you played e4 in your list but the FEN still shows e3?) should be checked—if it was e4, watch for ...d4xe3 tactics if your queen ever leaves the e-file.\n\n**3) One concrete tuning idea**\n- **Tune search depth for knight outpost exploitation**: Your Ne5 placement was strong, but you spent several moves repositioning. Configure your engine to assign bonus weight to knights on stable central outposts (e5, d4) earlier, reducing the time spent routing via c6/e6. Suggest evaluating N→e5 as a 1-ply aspiration rather than waiting until the queen and rook align."
+    },
+    {
+      "ply": 35,
+      "timestamp": "2026-04-15T14:41:48.457Z",
+      "summary": "1) **Style notes**\n- White (Trinity) isplaying aggressively—Q to d5 is an advanced outpost, creating tactical complications\n- The queen tour (e4→g4→g3→e5→d4→d5) shows persistent attack focus but leaves the queen exposed multiple times\n- Black (Stockfish) responded accurately—kept pieces coordinated and avoided simplification\n\n2) **Tactical warning**\n- The move 35.e4d5 is questionable. After 35...cxd5, white's queen is trapped—no back rank escape, Knight on b1 can't cover, pawns are blocked. Black can likely win the queen or devastate the position. White should have played 35.Ne3 or 35.Qe3 first to create escape squares.\n\n3) **One concrete tuning idea for evaluation/search**\n- Add a penalty for queen moves that put the queen on squares lacking escape routes when the opponent has attackers behind the pawn front. This position exemplifies the danger—the d5 square was fully exposed, and Trinity failed to see the capture was forced. Stockfish would have found 35...cxd5 instantly."
+    },
+    {
+      "ply": 40,
+      "timestamp": "2026-04-15T14:42:00.048Z",
+      "summary": "**1) Style notes**\n- White shows aggressive piece activity, continually threatening with bishops (e3→e4→d5→c6)\n- Good central pawn push sequence: d5, d4, d5 establishing central control\n- White's king safety is prioritized (castled kingside, rook on f1)\n- **Potential over-extension**: Bishop on c6 is somewhat stranded on the queenside while black rook penetrates\n\n**2) Tactical warning**\n- Move 38...d8d4 was suspicious - Black gave up the open d-file for nothing. This should have been punished more decisively (winning piece or creating decisive threats)\n- After 40...d4c4, white has a tactical shot: **Bxc4!** attacks the queen's bishop on e6. The bishop can't capture back (illegal because it would leave king in check from e3-bishop). This wins a piece.\n\n**3) One concrete tuning idea for evaluation/search**\n- The evaluation likely undervalues \"hanging piece\" patterns where opponent pieces are overloaded after a capture. Add bonus for positions where a piece can be captured and the recapture is illegal (like Bxc4 now). Consider adding \"illegal recapture\" pattern recognition to improve piece capture evaluation."
+    },
+    {
+      "ply": 45,
+      "timestamp": "2026-04-15T14:42:36.466Z",
+      "summary": "1) **Style notes**\n- Trinity shows strong positional sense—bishop on c6 cramp black's kingside well\n- Good initiative in the ending—trading to restrict black's active pieces\n- The a1-d1 rook swing connects the back rank smoothly\n\n2) **Tactical warning**\n- The d4 pawn is backward and exposed—black's bishop on f8 and knight on g8 can converge on d5-d3. Look for ...Ne6 or ...Bg4 hitting d4.\n\n3) **Tuning idea for evaluation/search**\n- In endings with king safety imbalance (white's king sheltered, black's king exposed), add a small bonus for \"king attack surface\" in evaluation. Also consider deepening search around move 41-43 where the bishop went to b7—your engine seemed to miss the long-term positional squeeze that followed."
+    },
+    {
+      "ply": 50,
+      "timestamp": "2026-04-15T14:43:12.518Z",
+      "summary": "**1) Style notes**\n- Trinity played passively after equalizing material (d4xc6, c6xb7)\n- Repeatedly traded into worse positions (c1e3, e3d4, c6b7, a1d1) - avoided creating active counterplay\n- Pawn pushes on the queen's side (c2c4) came too late after position was strategically lost\n- Failed to challenge Black's dominant knight with b2-b4 or create threats against the exposed king\n\n**2) Tactical warning**\n- The white king at g1 is vulnerable with no defenders nearby and Black's queen/rook near the promotion zone\n- After 50...e7c6, White's d4 pawn is now backward on an open file; Black's rook can target it\n- If Black plays ...b7-b6, the b7-knight may dominate White's bishop - watch for positional sacrifices\n\n**3) One concrete tuning idea**\n- Increase penalty for \"trading into passive positions\" - after opponent has strong minor piece placement, trades that reduce own activity should be valued more negatively. Consider adding a term that penalizes exchanges when the opponent's remaining pieces have clear territorial advantages (e.g., central knights, open files near your king)."
+    },
+    {
+      "ply": 55,
+      "timestamp": "2026-04-15T14:43:44.867Z",
+      "summary": "Looking at this position after move 55:\n\n**1) Style notes**\n- White has completely stalled the dark-squared bishop (c1) - it never left the back rank\n- The move 55.c5 is passive; no threats, just advancing a pawn that could become a target\n- 44.Bb4 was exchanging into a lost endgame (bishop vs knight with badly placed white pieces)\n- White has played without clear plan since mid-game; drifting\n\n**2) Tactical warning**\n- **CRITICAL OVERSIGHT**: White's dark-squared bishop is still on c1 and has NO squares. This is a massive permanent weakness. From move 40 onwards, Black should exploit this by keeping the position closed and targeting the c1 diagonal. Black's last move c4c5 actually helps White by opening the position.\n\n**3) Tuning idea for evaluation/search**\n- Add a term penalizing bishops that remain trapped on initial squares for >15 moves\n- Weight king safety higher in endgame when opponent has active rook and your bishop is buried\n- The engine undervalues the long-term positional damage from the trapped c1-bishop (still evaluated as roughly equal)"
+    },
+    {
+      "ply": 60,
+      "timestamp": "2026-04-15T14:45:01.645Z",
+      "summary": "1) **Style Notes**\n- Overcommitted to a-pawn advance (57...d2, 59...b3) without generating meaningful threats\n- Mechanically exchanged pieces without purpose (51, 53, 55) — traded into a worse endgame\n- Positional awareness gap: allowed black to fix c5 as a permanent weakness while your king safety deteriorated\n- Defensive positioning missing — rooks remained passive rather than coordinating to create counterplay\n\n2) **Tactical Warning**\n- After 60...Bc7, white has no active plans; black's methodical improvement continues\n- The c5 pawn is about to fall or force unfavorable piece exchanges\n- White king on g1 faces potential rook infiltration via the h1-a1 diagonal if any pawn breaks occur\n\n3) **Concrete Tuning Idea**\n- Add a *counterplay bias* when static evaluation is negative by >0.5 pawns and no active plans exist\n- Specifically, after move 55 (c4c5), evaluation was already declining; prioritize Nd5 or Re3 to introduce tactical complications rather than passive waiting moves like Rd2 or b3\n- Current search may overvalue material trades when positionally trapped — add a term that penalizes moves which reduce own piece activity without concrete gain"
+    },
+    {
+      "ply": 65,
+      "timestamp": "2026-04-15T14:45:42.246Z",
+      "summary": "**1) Style Notes**\n- Trinity shows solid **technical closing**—simplified into a winning rook ending after gaining material\n- Efficient move sequence: consistent piece activity, avoided unnecessary checks\n- Maintains calm under pressure (didn't panic when black's rook infiltrated c2)\n- The e2→d2 pawn push was clean; no wasted moves\n\n**2) Tactical Warning**\n- **King activation timing**: After 65...Kd2, white's rook on d1 is now trapped behind its own pawn. White must either force the rook to a more active square or create a fortress. The c5-pawn may become a target—ensure you have a clear defense plan before black's king approaches.\n\n**3) Tuning Idea**\n- **Increase contempt factor by ~0.15–0.20**: In simplified rook endgames where you're already material up, the engine tends to \"coast\" and can misjudge zugzwang positions. A modest contempt increase helps it prioritize king activity and avoid passive setups that allow counterplay (like black's current a-pawn pressure)."
+    },
+    {
+      "ply": 70,
+      "timestamp": "2026-04-15T14:46:10.069Z",
+      "summary": "**1) Style notes**\n- White's moves from ply 55-70 show excessive passivity: **d1d2** (57), **f2f3** (61), **g1f2** (67) are all defensive, reactive moves\n- White never challenged the center or created threats after the early middlegame\n- The rook never left the back rank until forced; missed opportunities to generate activity\n- No attempt to trade pieces and simplify into a drawn endgame despite being worse\n\n**2) Tactical warning**\n- White's position is now strategically lost: Black has a protected passed pawn on e5, active knight, and rook on c3\n- The h2-pawn is hanging, and the b2-pawn is under attack. White has no constructive moves.\n\n**3) One concrete tuning idea for evaluation/search**\n- Increase penalty for **inactivity** (low king/rook mobility, back-rank confinement) in evaluation when the side is slightly worse. This engine played too \"safe\" in a lost position—it needed activity to create practical chances rather than slowly declining. Consider adding a term that rewards rook activation on open files or the 7th rank, especially in queenless positions."
+    },
+    {
+      "ply": 75,
+      "timestamp": "2026-04-15T14:46:22.237Z",
+      "summary": "1) Style notes\n- White's pawn moves (f2-f3, e1-e2, e2-d2) show defensive repositioning under pressure\n- White's exchange sacrifice at move 65-67 (e2xd2) was positional acceptance - turned into active rook vs king+pawns\n- Move 73 (d2-f2) connecting rooks was sound, but move 75 (d4-e4) appears to retreat from active post\n\n2) Tactical warning\n- At ply 75 with Black's rook on d1 and pawn on e5, check if e5e4# pattern is available for Black (e5-e4 followed by discovered check from queen if any). White's king on e4 is now directly in check path if Black queen/rook line exists.\n\n3) Tuning idea for evaluation/search\n- Verify \"defender value\" scaling for king Safety when opposite-colored bishops remain AND opposite-side pawn majorities exist (e5 pawn vs g2/h2 wing). Material imbalance evaluation may underweight Black's e-pawn passed + connected threat."
+    },
+    {
+      "ply": 80,
+      "timestamp": "2026-04-15T14:46:59.149Z",
+      "summary": "```\n1) Style notes\n- Trinity consistently chooses patient, maneuvering moves (e2-d2, g1-f2, d4-e4-e3-e2) rather than sharp tactical commits\n- Shows preference for king safety and pawn structure preservation over activity\n- Avoided active rook moves; still hasn't activated rook from f2 effectively\n- Position reflects defensive, solid style - might miss winning chances inequal positions\n\n2) Tactical warning\n- After 71...c3c1 and 73...c1d1, white's rook remained passive on f2 while black's rook infiltrated\n- Move 75. d4e4 allowed ...f7e6, creating a passed pawn weakness\n- White's king on g2 is quite exposed; black's knight on e5 harasses the pawn chain\n- No immediate forced mate or tactic detected, but white's position is deteriorating due to passive play\n\n3) Tuning idea\n- Increase evaluation bonus for rook activity/8th rank penetration\n- Currently undervalues the positional advantage of black's rook on the 1st rank vs white's rook still on f2\n- Could tune: rookFileBonus[7] by ~0.15 to encourage early rook lifting in equal positions\n- Search: verify if 73...c1d1 was actually the best move - Trinity may have missed 73.Re1 or 73.Rf1 preserving better drawing chances\n```"
+    },
+    {
+      "ply": 85,
+      "timestamp": "2026-04-15T14:47:16.011Z",
+      "summary": "**1) Style notes**\n- Black has been entirely reactive since ~ply 75 — every move is a check or escape\n- White's strategic plan: pressure on e6 king via Qf3 + Re1, creating zugzwang-style dilemmas\n- Trinity (Black) at ply 85: **d2c2** retreats the queen off the e2-square, finally freeing the e-file but isolating the d2 pawn\n- This move has no check, no threat, no defensive purpose — purely positional concession\n\n**2) Tactical warning**\n- White can now play **86. Re7** — winning material (e7 pawn hanging + trapped queen threat on c7) unless black has a concrete resource like ...Qc3+ or ...Rb8 blocking\n- After 85...d2c2, verify whether black has a zwischenzug: if White trades with Re7xe7 and black recaptures, does ...e7xf2+ or ...Qc3+ exist? The engine should check for hidden defensive shots before claiming +5.0\n\n**3) One concrete tuning idea for evaluation/search**\n- Add a penalty term for \"move longevity in defensive positions\" — after move 70, Black made 15 consecutive non-checking, non-capturing moves (d3e5→d2c2). The engine may overweight static positional scores while missing that the opponent is effectively resigned. Consider increasing drawishness/termination heuristics in long-standing +4.0 positions where the trailing side makes only king escapes."
+    },
+    {
+      "ply": 90,
+      "timestamp": "2026-04-15T14:47:56.059Z",
+      "summary": "Analyzing position after ply 90...\n\n**1) Style notes**\n- Trinity's rook remains passive on e2 throughout, never activating to threaten the f4 passed pawn\n- White consistently retreats pieces while Black advances (b2→b1, c2→b2→b1)\n- No attempt to create counter-threats or piece activity to distract from defensive duties\n\n**2) Tactical warning**\n- White has allowed Black's f-pawn to advance to f4 with no compensation\n- The passed f4 pawn ties down White's rook defensively; this cannot be disputed aggressively\n\n**3) Tuning idea**\n- Evaluation likely undervalues the strategic weakness of having rook completely tied to defense vs passed pawn\n- Search could explore exchanging the passive rook for the knight to unleash the remaining pawns - though in this position material equality may not suffice"
+    },
+    {
+      "ply": 95,
+      "timestamp": "2026-04-15T14:48:57.370Z",
+      "summary": "1) **Style notes**\n- White (Trinity) playing very reactively - spending 4+ moves shuffling pieces on the queenside (80-87, 93-95) while Black builds initiative on the kingside\n- Missing opportunity to activate own pieces; the rook on d1 and king on c1 remain passive throughout\n- After 91...g5xf4, White should have considered counter-attacking rather than continuing piece shuffles\n\n2) **Tactical warning**\n- Black's king at d5 is currently safe, but if you can force h4-h3 or create threats around the black king, the d5 square becomes exposed - look for tempo gains to disrupt Black's pawn push\n\n3) **One concrete tuning idea**\n- Increase evaluation weight for piece activity/central control in endings; White's position has some structural assets (b3 passed pawn, potential to pressure d5) but current tuning may undervalue active piece deployment vs. passive defense"
+    },
+    {
+      "ply": 100,
+      "timestamp": "2026-04-15T14:49:11.475Z",
+      "summary": "The final position after move 100 shows Black delivering checkmate with 100...e3e2#.\n\n**1) Style notes:**\n- Trinity lost decisive material in moves 85-97 (Rook vs nothing - a queen and knight were already gone): d2c2 → e6d5 → c2b2 → f6f5 → b2b1 → f5f4 → g3f4 → g5f4...\n- The rook ended up trapped on b1 after 89...f5f4, unable to escape. Continuing to move it (b1c2 at 93) was desperation.\n- Position deteriorated from at least move 88 when Stockfish played ...f6f5 - White should have seen the rook was in danger.\n- No defensive resources found after the damage started.\n\n**2) Tactical warning:**\n- Move 88 ...f6f5 was the critical error - it gave up a winning交換 with 88...f5f4?? The rook on g2 was hanging. Actually looking at the sequence: 88...f6f5 attacks g3 pawn. White played g3f4?? That handed over the rook. White's move 91 g3f4 was a severe mistake - it effectively gave up the rook.\n\n**3) One concrete tuning idea for evaluation/search:**\n- Evaluate rook outpost dangers in the opening/middlegame better. After White's king moved c1-b1-a1... wait that's wrong, let me reconsider - White had rook on g2 and king on c1. Need to check if the defense was calculable. The issue: White's pieces were scattered but there's no obvious forced save after move 88...f5f4 (attacking g3). After 89...f4, white's rook on g2 was hanging. Searching this exchange line deeper may help."
+    },
+    {
+      "ply": 105,
+      "timestamp": "2026-04-15T14:49:48.272Z",
+      "summary": "1) **Style notes**\n- White (Trinity) played too passively after move 90. Instead of creating counterplay, it allowed Black to consolidate and restrict all weak squares.\n- The b3-b4 push (move 105) is slow and accomplishes little—it doesn't challenge the e5-d4-c5 chain or create threats.\n- White's king drifted to e3 in a losing position, making it a target. Should have stayed closer to the weak c-pawn.\n\n2) **Tactical warning**\n- Black's knight on g5 can jump to **f3** after any king move, attacking e1-style and threatening back-rank ideas. With White's king on e3 and nothing on f2, this knight leap is a serious coup attempt.\n\n3) **One concrete tuning idea for evaluation/search**\n- Add a penalty for \"passive king in endgame\" when own king is far from opponent's weak pawns. White's king on e3 while Black's pawns target a3/c3 should register as high danger—but current eval likely sees +2.5 and doesn't communicate the urgency to defend."
+    },
+    {
+      "ply": 110,
+      "timestamp": "2026-04-15T14:50:16.518Z",
+      "summary": "**1) Style notes**\n- White (Trinity) has been outmaneuvered in the king vs king endgame—lost the opposition multiple times\n- Pawn exchange decisions lack clear purpose; moved pieces without concrete goals (e.g., 101.c2c3, 105.b3b4)\n- Passive queen-side pawn majority deployment; a4-a5-a6 sequence would create actual threats\n- 109.a2a4 is a tempo-losing move in a king-and-pawn ending where every step counts\n\n**2) Tactical warning**\n- The pawn on h3 is hanging and under direct attack. Black's knight on h2 could capture it, but more critically, if white's king moves, f2xe3+ becomes a direct threat to white's king safety. Current line is fragile.\n\n**3) One concrete tuning idea**\n- Increase penalty for \"tempo-losing moves\" in king-pawn endings. After move 100+, each king move that doesn't advance a pawn or contest a key square should carry higher cost. Trinity spent ~8 moves shuffling king and pawns without progress while Stockfish advanced f3→f2 decisively."
+    },
+    {
+      "ply": 115,
+      "timestamp": "2026-04-15T14:50:54.902Z",
+      "summary": "1) **Style notes**\n- White's last 10 moves: mostly waiting moves with king and pawns (b4, a4, d2→c1→b1). No active plan to improve position or create threats.\n- Black has been steadily consolidating: king to c4, knight covering squares, pawns defending.\n- White has no winning chances from this position. Passed b-pawn is blockaded; no other passed pawns; black king is solid.\n- No attempt to create practical problems for opponent or vary from obvious moves.\n\n2) **Tactical warning**\n- No immediate tactical dangers in position, but White has drifted into a completely lost (mate-in-1 for Black would be visible) endgame with zero counterplay. Move 113-115 sequence (d1→c1→b1) just retreated king toward a dead zone.\n\n3) **One concrete tuning idea for evaluation/search**\n- When evaluating late endgame with no passed pawns, extra piece, and opponent has no immediate threats: add strong positional draw detection (opponent king can reach support point for knight fork, piece coordination patterns). The engine likely overestimates White's winning chances in this blocked position and fails to recognize it as a trivial draw."
+    },
+    {
+      "ply": 120,
+      "timestamp": "2026-04-15T14:51:16.204Z",
+      "summary": "# Coaching Feedback\n\n**1) Style notes**\n- White (Trinity) has been completely passive since ~move 100 — shuffling without coherent plan\n- b3b4 (move 105) accomplished nothing; a4-a3 was also aimless\n- White's king stuck in corner at a1 with no constructive moves\n- No attempt to create counterplay or threaten Black's exposed king\n\n**2) Tactical warning**\n- White's queen at b2 and knight at h2 are doing nothing — they're \"spectators\"\n- After 120...f2b2, Black's queen now controls the a3-b2-c1 diagonal and threatens a2\n- White's position is strategically lost with no practical chances\n\n**3) One concrete tuning idea**\n- **Search depth:** Trinity may be undervaluing king activity in endgames. Add a term penalizing king distance from opponent pawns or reward proximity to center in low-material positions. The engine seems to accept passive king placement without enough search depth to realize the position is already lost."
+    }
+  ],
+  "startedAt": "2026-04-15T14:37:30.893Z",
+  "endedAt": "2026-04-15T14:51:16.205Z"
+}

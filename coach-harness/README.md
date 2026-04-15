@@ -69,6 +69,6 @@ npm run build
 
 Per match ID under `coach-harness/runs/<match-id>/`:
 
-- `events.ndjson` - all move events
-- `coach.ndjson` - periodic coach responses
+- `events.json` - all move events
+- `coach.json` - periodic coach responses
 - `report.json` - final merged state/report
