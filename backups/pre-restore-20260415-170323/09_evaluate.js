@@ -79,9 +79,6 @@ function eval_pawns_cached() {
 const ATK_WEIGHT = [0, 0, 2, 2, 3, 5, 0]; // index = piece type
 
 function eval_king_safety() {
-    // In endgames, king activity is more important than king shelter.
-    if (phase < 12) return 0;
-
     let score = 0;
     for (const color of [WHITE, BLACK]) {
         const sign = color === WHITE ? 1 : -1;
@@ -172,19 +169,14 @@ function eval_pieces() {
 
         if (type === ROOK) {
             const f = sq & 7;
-            const r = sq >> 4;
             let own_pawn = false, enemy_pawn = false;
-            for (let rr = 0; rr < 8; rr++) {
-                const p = board[rr * 16 + f];
+            for (let r = 0; r < 8; r++) {
+                const p = board[r * 16 + f];
                 if (p === (PAWN | color))        own_pawn   = true;
                 if (p === (PAWN | (color ^ 24))) enemy_pawn = true;
             }
             if (!own_pawn && !enemy_pawn) score += 20 * sign; // open file
             else if (!own_pawn)           score += 10 * sign; // semi-open
-
-            // Bonus for active rook on the 7th rank (2nd rank for black).
-            const seventh_rank = color === WHITE ? 6 : 1;
-            if (r === seventh_rank) score += 15 * sign;
         }
     }
 
@@ -218,13 +210,6 @@ function eval_mobility() {
                 if (type === KNIGHT) break;
                 csq += step;
             }
-        }
-
-        // Penalize trapped/passive pieces with too little mobility.
-        if (mob <= 1) {
-            score -= 25 * sign;
-        } else if (type === BISHOP && mob <= 2) {
-            score -= 15 * sign;
         }
 
         // Mobility bonuses relative to expected value (normalise around typical counts)
