@@ -1,0 +1,7 @@
+Tournament finished: 2026-04-15T10:00:22.481Z
+
+FINAL LEADERBOARD
+────────────────────────────────────────────────────────────────────────────────────────────────────
+Rank Engine                    Elo     Games  Score  Avg Time  W/D/L
+1    Trinity-Alpha-0.1         1500    2      1.0           0s 0/2/0
+2    Trinity-modular           1500    2      1.0           0s 0/2/0

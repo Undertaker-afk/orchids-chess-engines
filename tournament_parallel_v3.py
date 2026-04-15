@@ -329,6 +329,7 @@ def main():
     engines = [
         Engine("Trinity-Modular", ["node", "dist/Trinity-modular.js"]),
         Engine("Trinity-Alpha-0.1", ["node", "Trinity-Alpha-0.1.js"]),
+        Engine("Trinity-1.3", ["node", "Trinity-1.3.js"]),
         Engine("Trinity-1.2", ["node", "Trinity-1.2.js"])
     ]
 
