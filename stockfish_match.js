@@ -18,7 +18,7 @@ function parseCliArgs(argv) {
 
 function runPython(cmd, args) {
   return new Promise((resolve, reject) => {
-    const py = spawn('python', ['-c', cmd, ...args], { stdio: ['pipe', 'pipe', 'pipe'] });
+    const py = spawn('python3', ['-c', cmd, ...args], { stdio: ['pipe', 'pipe', 'pipe'] });
     let out = '', err = '';
     py.stdout.on('data', d => out += d.toString());
     py.stderr.on('data', d => err += d.toString());
@@ -103,99 +103,109 @@ async function runTrinityMove(enginePath, fen, movetime) {
   });
 }
 
-async function createStockfish(level, threads, hash) {
+async function createStockfish(depth) {
   const proc = spawn('node', ['node_modules/stockfish/bin/stockfish.js'], { stdio: ['pipe', 'pipe', 'pipe'] });
   let bestMoveResolve = null;
-  let readyResolve = null;
-  const readyPromise = new Promise(resolve => { readyResolve = resolve; });
 
   proc.stdout.on('data', d => {
     const lines = d.toString().split(/\r?\n/);
     for (let line of lines) {
       line = line.trim();
       if (!line) continue;
-      if (line === 'uciok' || line === 'readyok') {
-        if (line === 'readyok') readyResolve();
-        continue;
-      }
-      if (line.startsWith('bestmove') && bestMoveResolve) {
+      if (line.startsWith('bestmove')) {
         const parts = line.split(' ');
         const move = parts[1] || '0000';
-        const resolve = bestMoveResolve;
-        bestMoveResolve = null;
-        console.log('Stockfish bestmove', move);
-        resolve(move);
+        if (bestMoveResolve) {
+            bestMoveResolve(move);
+            bestMoveResolve = null;
+        }
       }
     }
   });
-  proc.stderr.on('data', d => process.stderr.write('SFERR ' + d.toString()));
 
   function send(cmd) {
     proc.stdin.write(cmd + '\n');
   }
 
   send('uci');
-  await new Promise(resolve => setTimeout(resolve, 200));
-  send('setoption name UCI_LimitStrength value true');
-  send(`setoption name Skill Level value ${level}`);
-  send(`setoption name Threads value ${threads}`);
-  send(`setoption name Hash value ${hash}`);
+  await new Promise(r => setTimeout(r, 200));
   send('isready');
-  await readyPromise;
-  console.log('stockfish ready');
-  send('ucinewgame');
+  await new Promise(r => setTimeout(r, 200));
 
   return {
     move: (fen, movetime) => new Promise((resolve) => {
-      console.log('STOCKFISH: request move', movetime);
-      let timer;
-      bestMoveResolve = move => {
-        if (!timer) return;
-        clearTimeout(timer);
-        timer = null;
-        resolve(move);
-      };
+      bestMoveResolve = resolve;
       send(`position fen ${fen}`);
-      send(`go movetime ${movetime}`);
-      timer = setTimeout(() => {
-        if (bestMoveResolve) {
-          bestMoveResolve('0000');
-          bestMoveResolve = null;
-        }
-      }, movetime + 10000);
-    })
+      send(`go depth ${depth}`);
+    }),
+    stop: () => proc.kill()
   };
 }
 
-async function playGame(engineFile, movetime, first) {
-  const stockfish = await createStockfish(0, 1, 16);
+async function playGame(engineFile, movetime, depth) {
+  const stockfish = await createStockfish(depth);
   let fen = DEFAULT_FEN;
   let result = '*';
-  for (let ply = 0; ply < 100; ply++) {
-    const currentEngine = (ply % 2 === 0)
-      ? { type: first }
-      : { type: first === 'trinity' ? 'stockfish' : 'trinity' };
-    console.log(`PLY ${ply} turn=${currentEngine.type} fen=${fen}`);
+  let moves = [];
+  
+  for (let ply = 0; ply < 150; ply++) {
+    const isTrinity = (ply % 2 === 0);
+    
     let move;
-    if (currentEngine.type === 'trinity') {
+    if (isTrinity) {
       move = await runTrinityMove(engineFile, fen, movetime);
-      console.log('Trinity move', move);
     } else {
       move = await stockfish.move(fen, movetime);
-      console.log('Stockfish move', move);
     }
-    if (!move || move === '0000') { result = currentEngine.type === 'trinity' ? '0-1' : '1-0'; break; }
+    
+    if (!move || move === '0000' || move === '(none)') { 
+        result = isTrinity ? '0-1 (Timeout/Error)' : '1-0 (Stockfish Error)'; 
+        break; 
+    }
+    
     const valid = await validateMove(fen, move);
-    if (valid !== 'ok') { result = currentEngine.type === 'trinity' ? '0-1' : '1-0'; break; }
+    if (valid !== 'ok') { 
+        result = isTrinity ? `0-1 (Trinity Illegal Move: ${move})` : `1-0 (Stockfish Illegal Move: ${move})`; 
+        break; 
+    }
+    
+    moves.push(move);
     fen = await applyMove(fen, move);
+    
+    // Check if game is over via python
+    const stateCmd = `import chess,sys,json\nfen=sys.argv[1]\nb=chess.Board(fen)\nprint(json.dumps({'over': b.is_game_over(), 'result': b.result()}))`;
+    try {
+        const stateStr = await runPython(stateCmd, [fen]);
+        const state = JSON.parse(stateStr);
+        if (state.over) {
+            result = state.result;
+            break;
+        }
+    } catch (e) {}
   }
-  console.log('Result:', result);
+  
+  stockfish.stop();
+  return { result, moves, finalFen: fen };
 }
 
 (async () => {
   try {
     const opts = parseCliArgs(process.argv.slice(2));
-    await playGame('Trinity-1.2.js', opts.movetime, opts.first);
+    const enginePath = process.argv.includes('--engine') ? process.argv[process.argv.indexOf('--engine') + 1] : 'dist/Trinity-modular.js';
+    
+    console.log(`=== GAME 1: Stockfish Depth 1 ===`);
+    let g1 = await playGame(enginePath, opts.movetime, 1);
+    console.log(`Result: ${g1.result} | Moves: ${g1.moves.length}`);
+    
+    console.log(`\\n=== GAME 2: Stockfish Depth 3 ===`);
+    let g2 = await playGame(enginePath, opts.movetime, 3);
+    console.log(`Result: ${g2.result} | Moves: ${g2.moves.length}`);
+    
+    console.log(`\\n=== GAME 3: Stockfish Depth 5 ===`);
+    let g3 = await playGame(enginePath, opts.movetime, 5);
+    console.log(`Result: ${g3.result} | Moves: ${g3.moves.length}`);
+    
+    process.exit(0);
   } catch (err) {
     console.error(err);
     process.exit(1);

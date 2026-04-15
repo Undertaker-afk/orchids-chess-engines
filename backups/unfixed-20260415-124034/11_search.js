@@ -66,12 +66,8 @@ function search(depth, alpha, beta, is_pv, prev_move) {
     // Repetition / 50-move draw
     if (ply > 0 && halfmove >= 100) return 0;
     const rep_limit = Math.max(0, ply - halfmove);
-    let rep_count = 0;
     for (let i = ply - 2; i >= rep_limit; i -= 2) {
-        if (state_hash_lo[i] === hash_lo && state_hash_hi[i] === hash_hi) {
-            rep_count++;
-            if (rep_count >= 2) return 0;
-        }
+        if (state_hash_lo[i] === hash_lo && state_hash_hi[i] === hash_hi) return 0;
     }
 
     const in_check = is_attacked(king_sq[side === WHITE ? 0 : 1], side ^ 24);
@@ -191,8 +187,10 @@ function search(depth, alpha, beta, is_pv, prev_move) {
                     killers[ply][0] = m;
                     const hkey = ((m & 127) << 7) | ((m >> 7) & 127);
                     history[hkey] += depth * depth;
-                    // Saturating clamp avoids O(N) table decay in this hot path.
-                    if (history[hkey] > 32000) history[hkey] = 16000;
+                    // Prevent history overflow
+                    if (history[hkey] > 1_000_000) {
+                        for (let k = 0; k < 16384; k++) history[k] >>= 2;
+                    }
                     if (prev_move) {
                         const cm_key = ((prev_move & 127) << 7) | ((prev_move >> 7) & 127);
                         countermove[cm_key] = m;

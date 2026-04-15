@@ -177,7 +177,14 @@ let hash_lo = 0, hash_hi = 0;
 // Pawn-only hash for the pawn structure cache
 let pawn_hash_lo = 0, pawn_hash_hi = 0;
 
-function rand32() { return (Math.random() * 0x100000000) | 0; }
+let zobrist_seed = 0x6b8b4567;
+
+function rand32() {
+	zobrist_seed ^= zobrist_seed << 13;
+	zobrist_seed ^= zobrist_seed >>> 17;
+	zobrist_seed ^= zobrist_seed << 5;
+	return zobrist_seed | 0;
+}
 
 for (let i = 0; i < 14 * 128; i++) { z_lo[i] = rand32(); z_hi[i] = rand32(); }
 for (let i = 0; i < 16;  i++)      { z_castle_lo[i] = rand32(); z_castle_hi[i] = rand32(); }
@@ -1153,8 +1160,12 @@ function search(depth, alpha, beta, is_pv, prev_move) {
     // Repetition / 50-move draw
     if (ply > 0 && halfmove >= 100) return 0;
     const rep_limit = Math.max(0, ply - halfmove);
+    let rep_count = 0;
     for (let i = ply - 2; i >= rep_limit; i -= 2) {
-        if (state_hash_lo[i] === hash_lo && state_hash_hi[i] === hash_hi) return 0;
+        if (state_hash_lo[i] === hash_lo && state_hash_hi[i] === hash_hi) {
+            rep_count++;
+            if (rep_count >= 2) return 0;
+        }
     }
 
     const in_check = is_attacked(king_sq[side === WHITE ? 0 : 1], side ^ 24);
@@ -1274,10 +1285,8 @@ function search(depth, alpha, beta, is_pv, prev_move) {
                     killers[ply][0] = m;
                     const hkey = ((m & 127) << 7) | ((m >> 7) & 127);
                     history[hkey] += depth * depth;
-                    // Prevent history overflow
-                    if (history[hkey] > 1_000_000) {
-                        for (let k = 0; k < 16384; k++) history[k] >>= 2;
-                    }
+                    // Saturating clamp avoids O(N) table decay in this hot path.
+                    if (history[hkey] > 32000) history[hkey] = 16000;
                     if (prev_move) {
                         const cm_key = ((prev_move & 127) << 7) | ((prev_move >> 7) & 127);
                         countermove[cm_key] = m;

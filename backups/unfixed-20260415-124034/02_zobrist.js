@@ -14,14 +14,7 @@ let hash_lo = 0, hash_hi = 0;
 // Pawn-only hash for the pawn structure cache
 let pawn_hash_lo = 0, pawn_hash_hi = 0;
 
-let zobrist_seed = 0x6b8b4567;
-
-function rand32() {
-	zobrist_seed ^= zobrist_seed << 13;
-	zobrist_seed ^= zobrist_seed >>> 17;
-	zobrist_seed ^= zobrist_seed << 5;
-	return zobrist_seed | 0;
-}
+function rand32() { return (Math.random() * 0x100000000) | 0; }
 
 for (let i = 0; i < 14 * 128; i++) { z_lo[i] = rand32(); z_hi[i] = rand32(); }
 for (let i = 0; i < 16;  i++)      { z_castle_lo[i] = rand32(); z_castle_hi[i] = rand32(); }

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "chess": "^1.5.1",
     "stockfish": "^18.0.7"
   },
   "scripts": {

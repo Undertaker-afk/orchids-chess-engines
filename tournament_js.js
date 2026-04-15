@@ -71,7 +71,7 @@ class Engine {
         this.scriptPath = scriptPath;
         this.isStockfish = isStockfish;
         this.stockfishPath = stockfishPath;
-        this.elo = 1500;
+        this.elo = 1200;
         this.games = 0;
         this.score = 0;
         this.wins = 0;
@@ -170,7 +170,7 @@ async function validateMove(fen, uci) {
     // Use python chess library for reliable move validation
     return new Promise((resolve) => {
         const { spawn } = require('child_process');
-        const py = spawn('python', ['-c', `
+        const py = spawn('python3', ['-c', `
 import chess, sys
 fen = sys.argv[1]
 uci = sys.argv[2]
@@ -203,7 +203,7 @@ async function playGame(white, black, gameId, config) {
     while (true) {
         // Check game state via python
         const state = await new Promise((resolve) => {
-            const py = spawn('python', ['-c', `
+            const py = spawn('python3', ['-c', `
 import chess, sys, json
 fen = sys.argv[1]
 b = chess.Board(fen)
@@ -243,7 +243,7 @@ print(json.dumps({
 
         // Apply move via python to get new FEN
         const newFen = await new Promise((resolve) => {
-            const py = spawn('python', ['-c', `
+            const py = spawn('python3', ['-c', `
 import chess, sys
 fen = sys.argv[1]
 uci = sys.argv[2]
