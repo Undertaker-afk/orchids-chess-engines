@@ -1,0 +1,10 @@
+{
+  "name": "frostrainer",
+  "version": "0.1.0",
+  "description": "Portable CPU-only coach harness for FEN-in, UCI-out chess engines.",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "frostrainer": "./frostrainer.mjs"
+  }
+}
