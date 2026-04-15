@@ -1,10 +1,17 @@
 {
   "dependencies": {
     "chess": "^1.5.1",
+    "class-variance-authority": "^0.7.1",
+    "react": "^19.2.5",
     "stockfish": "^18.0.7"
   },
   "scripts": {
     "build:engine": "node build.js",
-    "test:api": "node scripts/test-chess-api.js"
+    "test:api": "node scripts/test-chess-api.js",
+    "web": "tsx coach-harness/src/server.ts"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "node-minify": "^3.6.0"
   }
 }

@@ -1,39 +1,25 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const compressor = require('node-minify');
 
 const rootDir = __dirname;
 const srcDir = path.join(rootDir, 'src');
 const distDir = path.join(rootDir, 'dist');
 const outFile = path.join(distDir, 'Trinity-modular.js');
 const compactOutFile = path.join(distDir, 'Trinity-modular.compact.js');
+const minifyInputFile = path.join(distDir, 'Trinity-modular.minify-input.tmp.js');
 
 function sortModules(a, b) {
     return path.basename(a).localeCompare(path.basename(b), undefined, { numeric: true });
 }
 
-function compactSource(code) {
-    const lines = code
-        .split('\n')
-        .filter((line, idx) => {
-            if (idx === 0 && line.startsWith('#!')) return true;
-            return !/^\s*\/\/.*$/.test(line);
-        })
-        .map((line) => line.replace(/[\t ]+$/g, ''));
-
-    const compacted = [];
-    let previousBlank = false;
-    for (const line of lines) {
-        const isBlank = line.trim() === '';
-        if (isBlank && previousBlank) continue;
-        compacted.push(line);
-        previousBlank = isBlank;
-    }
-
-    return compacted.join('\n').trimEnd() + '\n';
+function stripNumericSeparators(code) {
+    // Some minifier parser versions fail on numeric separators (e.g. 1_000_000).
+    return code.replace(/(\d)_(?=\d)/g, '$1');
 }
 
-function main() {
+async function main() {
     if (!fs.existsSync(srcDir)) {
         throw new Error(`Missing src directory: ${srcDir}`);
     }
@@ -65,8 +51,18 @@ function main() {
     fs.mkdirSync(distDir, { recursive: true });
     fs.writeFileSync(outFile, combined, 'utf8');
 
-    const compacted = compactSource(combined);
-    fs.writeFileSync(compactOutFile, compacted, 'utf8');
+    const minifyInput = stripNumericSeparators(combined);
+    fs.writeFileSync(minifyInputFile, minifyInput, 'utf8');
+
+    try {
+        await compressor.minify({
+            compressor: 'terser',
+            input: minifyInputFile,
+            output: compactOutFile
+        });
+    } finally {
+        if (fs.existsSync(minifyInputFile)) fs.unlinkSync(minifyInputFile);
+    }
 
     console.log(`Built: ${outFile}`);
     console.log(`Compact: ${compactOutFile}`);
@@ -75,4 +71,7 @@ function main() {
     console.log(`Size: ${Math.round(fs.statSync(compactOutFile).size / 1024)} KB (compact)`);
 }
 
-main();
+main().catch((err) => {
+    console.error('Build failed:', err && err.message ? err.message : err);
+    process.exit(1);
+});
