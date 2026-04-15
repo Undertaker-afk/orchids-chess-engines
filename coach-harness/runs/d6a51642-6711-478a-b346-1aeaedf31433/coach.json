@@ -1,7 +1,0 @@
-[
-  {
-    "ply": 10,
-    "timestamp": "2026-04-15T17:39:01.275Z",
-    "summary": "**1) Style notes**\n- ✓ Solid opening knowledge - you executed the QGD Exchange Variation correctly\n- ✓ Good piece activity - knights on natural squares, queen influencing the center\n- ✓ Prophylactic thinking evident in 7.Bg5, preventing Black's natural development\n- ⚠ Minor: 9.Bxf6 was the only move, not a \"plan\" - make sure engine isn't overvaluing obvious trades\n- ⚠ Could explore 7.c4 (Alekhine Gambit style) to challenge Black's center more actively\n\n**2) Tactical warning**\n- After 10...Qf6, Black's queen and knight occupy the same file as White's rook on h1. With castling still available, White has a potential initiative along the h-file if Black castles kingside. Watch for tactics involving Rh1-h3-h1+ patterns.\n- Black's queen on f6 is slightly exposed - could be a target after eventual castling if Black doesn't reposition it.\n\n**3) Concrete tuning idea**\nYour engine shows good positional awareness but may undervalue **pawn structure weaknesses**. Consider slightly increasing the weight for:\n- Isolated pawns (d5 pawn in this position)\n- Backward pawns on half-open files\n- Doubled pawns\n\nThis position offers a small edge to White, but your current evaluation may be too optimistic or pessimistic depending on how the engine weights piece activity vs. structure."
-  }
-]
