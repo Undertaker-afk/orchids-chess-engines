@@ -13,7 +13,7 @@ function set_fen(fen) {
     eval_mg = 0; eval_eg = 0; phase = 0;
     hash_lo = 0; hash_hi = 0;
     pawn_hash_lo = 0; pawn_hash_hi = 0;
-    ep = 0; castle = 0; halfmove = 0; ply = 0;
+    ep = 0; castle = 0; halfmove = 0; fullmove = 1; ply = 0;
     king_sq[0] = 0; king_sq[1] = 0;
 
     const parts = fen.trim().split(/\s+/);
@@ -69,6 +69,9 @@ function set_fen(fen) {
 
     // Half-move clock
     if (parts[4]) halfmove = parseInt(parts[4]) || 0;
+
+    // Full-move number
+    if (parts[5]) fullmove = Math.max(1, parseInt(parts[5]) || 1);
 }
 
 // ---------------------------------------------------------------------------

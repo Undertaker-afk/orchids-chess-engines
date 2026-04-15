@@ -11,6 +11,7 @@ let side     = WHITE;   // Side to move (WHITE or BLACK)
 let ep       = 0;       // En-passant target square (0 = none)
 let castle   = 0;       // Castle rights bitmask (bits 0-3: WK,WQ,BK,BQ)
 let halfmove = 0;       // Half-move clock (for 50-move rule)
+let fullmove = 1;       // Full-move number from FEN (starts at 1)
 let ply      = 0;       // Current search ply depth
 let eval_mg  = 0;       // Incremental middlegame material+PST score
 let eval_eg  = 0;       // Incremental endgame material+PST score

@@ -105,7 +105,7 @@ function search(depth, alpha, beta, is_pv, prev_move) {
     }
 
     // --- Null Move Pruning ---
-    if (!is_pv && !in_check && depth >= 2 && phase > 1) {
+    if (!is_pv && !in_check && depth >= 3 && phase > 2) {
         const R = depth >= 6 ? 3 : 2;
         make_null_move();
         const null_score = -search(depth - R - 1, -beta, -beta + 1, false, 0);
@@ -228,8 +228,9 @@ function search(depth, alpha, beta, is_pv, prev_move) {
 // ---------------------------------------------------------------------------
 function search_root() {
     nodes = 0; stop_search = false;
+    const in_check_root = is_attacked(king_sq[side === WHITE ? 0 : 1], side ^ 24);
     const time_limits = get_time_limits_ms(MOVE_TIME_MS);
-    const initial_budget_ms = compute_search_time_budget_ms(MOVE_TIME_MS, phase, halfmove);
+    const initial_budget_ms = compute_search_time_budget_ms(MOVE_TIME_MS, phase, halfmove, fullmove, in_check_root, 0);
     start_time = now(); stop_time = start_time + initial_budget_ms;
 
     // Reset per-search heuristics
@@ -299,7 +300,11 @@ function search_root() {
         if (stop_search) break;
         if (iter_best_move) {
             if (previous_iteration_best && iter_best_move !== previous_iteration_best) {
-                stop_time = Math.min(start_time + time_limits.max, stop_time + time_limits.instability_bonus);
+                stop_time = Math.min(start_time + time_limits.max, stop_time + (time_limits.instability_bonus || 0));
+            }
+            const score_swing = Math.abs(iter_best_score - prev_score);
+            if (score_swing >= 80) {
+                stop_time = Math.min(start_time + time_limits.max, stop_time + (time_limits.swing_bonus || 0));
             }
             best_move_root = iter_best_move;
             prev_score = iter_best_score;

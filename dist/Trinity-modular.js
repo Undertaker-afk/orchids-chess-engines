@@ -204,6 +204,7 @@ let side     = WHITE;   // Side to move (WHITE or BLACK)
 let ep       = 0;       // En-passant target square (0 = none)
 let castle   = 0;       // Castle rights bitmask (bits 0-3: WK,WQ,BK,BQ)
 let halfmove = 0;       // Half-move clock (for 50-move rule)
+let fullmove = 1;       // Full-move number from FEN (starts at 1)
 let ply      = 0;       // Current search ply depth
 let eval_mg  = 0;       // Incremental middlegame material+PST score
 let eval_eg  = 0;       // Incremental endgame material+PST score
@@ -1246,7 +1247,7 @@ function search(depth, alpha, beta, is_pv, prev_move) {
     }
 
     // --- Null Move Pruning ---
-    if (!is_pv && !in_check && depth >= 2 && phase > 1) {
+    if (!is_pv && !in_check && depth >= 3 && phase > 2) {
         const R = depth >= 6 ? 3 : 2;
         make_null_move();
         const null_score = -search(depth - R - 1, -beta, -beta + 1, false, 0);
@@ -1369,8 +1370,9 @@ function search(depth, alpha, beta, is_pv, prev_move) {
 // ---------------------------------------------------------------------------
 function search_root() {
     nodes = 0; stop_search = false;
+    const in_check_root = is_attacked(king_sq[side === WHITE ? 0 : 1], side ^ 24);
     const time_limits = get_time_limits_ms(MOVE_TIME_MS);
-    const initial_budget_ms = compute_search_time_budget_ms(MOVE_TIME_MS, phase, halfmove);
+    const initial_budget_ms = compute_search_time_budget_ms(MOVE_TIME_MS, phase, halfmove, fullmove, in_check_root, 0);
     start_time = now(); stop_time = start_time + initial_budget_ms;
 
     // Reset per-search heuristics
@@ -1440,7 +1442,11 @@ function search_root() {
         if (stop_search) break;
         if (iter_best_move) {
             if (previous_iteration_best && iter_best_move !== previous_iteration_best) {
-                stop_time = Math.min(start_time + time_limits.max, stop_time + time_limits.instability_bonus);
+                stop_time = Math.min(start_time + time_limits.max, stop_time + (time_limits.instability_bonus || 0));
+            }
+            const score_swing = Math.abs(iter_best_score - prev_score);
+            if (score_swing >= 80) {
+                stop_time = Math.min(start_time + time_limits.max, stop_time + (time_limits.swing_bonus || 0));
             }
             best_move_root = iter_best_move;
             prev_score = iter_best_score;
@@ -1478,7 +1484,7 @@ function set_fen(fen) {
     eval_mg = 0; eval_eg = 0; phase = 0;
     hash_lo = 0; hash_hi = 0;
     pawn_hash_lo = 0; pawn_hash_hi = 0;
-    ep = 0; castle = 0; halfmove = 0; ply = 0;
+    ep = 0; castle = 0; halfmove = 0; fullmove = 1; ply = 0;
     king_sq[0] = 0; king_sq[1] = 0;
 
     const parts = fen.trim().split(/\s+/);
@@ -1534,6 +1540,9 @@ function set_fen(fen) {
 
     // Half-move clock
     if (parts[4]) halfmove = parseInt(parts[4]) || 0;
+
+    // Full-move number
+    if (parts[5]) fullmove = Math.max(1, parseInt(parts[5]) || 1);
 }
 
 // ---------------------------------------------------------------------------
@@ -1616,6 +1625,122 @@ function compute_search_time_budget_ms(base_ms, phase_value, halfmove_clock) {
 
     // Slight boost in very early moves where opening choice matters.
     if (halfmove_clock <= 8) scale += 0.06;
+
+    return clamp(Math.floor(base_ms * scale), limits.min, limits.max);
+}
+
+// @module tapered_eval_optimizer
+// ==============================================================================
+// TAPERED EVAL OPTIMIZER (SCaffold)
+// This module intentionally has no runtime effect on search speed.
+// It provides feature extraction hooks for offline regression/tuning.
+// ==============================================================================
+
+function extract_eval_features() {
+    let white_material = 0;
+    let black_material = 0;
+    let white_minors = 0;
+    let black_minors = 0;
+    let white_majors = 0;
+    let black_majors = 0;
+
+    for (let sq = 0; sq < 128; sq++) {
+        if (sq & 0x88) continue;
+        const pc = board[sq];
+        if (!pc) continue;
+
+        const side_pc = pc & 24;
+        const pt = pc & 7;
+
+        if (side_pc === WHITE) white_material += PIECE_VAL[pt];
+        else black_material += PIECE_VAL[pt];
+
+        if (pt === KNIGHT || pt === BISHOP) {
+            if (side_pc === WHITE) white_minors++;
+            else black_minors++;
+        } else if (pt === ROOK || pt === QUEEN) {
+            if (side_pc === WHITE) white_majors++;
+            else black_majors++;
+        }
+    }
+
+    return {
+        phase,
+        halfmove,
+        fullmove,
+        material_diff: white_material - black_material,
+        minor_diff: white_minors - black_minors,
+        major_diff: white_majors - black_majors,
+        mg_eval: eval_mg,
+        eg_eval: eval_eg
+    };
+}
+
+// @module time_management
+// ==============================================================================
+// ADVANCED TIME MANAGEMENT
+// Overrides baseline timing helpers with fuller context:
+// - estimated moves remaining
+// - root instability support fields
+// - critical moment boosts (in-check / balanced sharp positions)
+// ==============================================================================
+
+function clamp(x, lo, hi) {
+    return x < lo ? lo : (x > hi ? hi : x);
+}
+
+function estimate_moves_remaining(phase_value, fullmove_number) {
+    // Crude but stable estimate for sudden-death controls.
+    let est = 32;
+    if (phase_value >= 18) est += 6;
+    else if (phase_value <= 8) est -= 8;
+
+    if (fullmove_number <= 12) est += 6;
+    else if (fullmove_number >= 40) est -= 4;
+
+    return clamp(est, 12, 44);
+}
+
+function get_time_limits_ms(base_ms, phase_value = 24, fullmove_number = 1) {
+    const base = Math.max(1, base_ms | 0);
+    const remaining = estimate_moves_remaining(phase_value, fullmove_number);
+
+    // Keep hard bounds around expected spend-per-move.
+    const min = Math.max(40, Math.floor(base * 0.40));
+    const max = Math.max(120, Math.floor(base * (remaining <= 18 ? 2.20 : 1.90)));
+
+    return {
+        min,
+        max,
+        instability_bonus: Math.max(20, Math.floor(base * 0.10)),
+        swing_bonus: Math.max(15, Math.floor(base * 0.07))
+    };
+}
+
+function compute_search_time_budget_ms(
+    base_ms,
+    phase_value,
+    halfmove_clock,
+    fullmove_number = 1,
+    in_check_root = false,
+    root_eval_cp = 0
+) {
+    const limits = get_time_limits_ms(base_ms, phase_value, fullmove_number);
+
+    let scale = 1.0;
+
+    // Opening and endgame handling.
+    if (phase_value >= 18) scale -= 0.10;
+    if (phase_value <= 8) scale += 0.22;
+
+    // Early critical development decisions.
+    if (halfmove_clock <= 10) scale += 0.05;
+
+    // Critical moments.
+    if (in_check_root) scale += 0.12;
+
+    // Keep extra time in close positions where small eval swings matter.
+    if (Math.abs(root_eval_cp) <= 60) scale += 0.05;
 
     return clamp(Math.floor(base_ms * scale), limits.min, limits.max);
 }

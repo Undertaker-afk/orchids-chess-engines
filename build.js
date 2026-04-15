@@ -33,10 +33,18 @@ async function main() {
         throw new Error('No source modules found under src/.');
     }
 
+    const moduleNums = modules
+        .map((m) => parseInt(path.basename(m).split('_')[0], 10))
+        .filter((n) => Number.isFinite(n))
+        .sort((a, b) => a - b);
+
     const missing = [];
-    for (let i = 0; i <= 13; i++) {
-        const prefix = String(i).padStart(2, '0') + '_';
-        if (!modules.some((m) => path.basename(m).startsWith(prefix))) {
+    const minMod = moduleNums.length ? moduleNums[0] : 0;
+    const maxMod = moduleNums.length ? moduleNums[moduleNums.length - 1] : 0;
+    const moduleSet = new Set(moduleNums);
+    for (let i = minMod; i <= maxMod; i++) {
+        if (!moduleSet.has(i)) {
+            const prefix = String(i).padStart(2, '0') + '_';
             missing.push(prefix + '*.js');
         }
     }
