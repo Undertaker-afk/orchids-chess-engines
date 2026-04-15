@@ -1495,7 +1495,8 @@ function move_to_uci(m) {
 // Reads one FEN per line and prints one best move (UCI) per line.
 // ==============================================================================
 
-const rl = readline.createInterface({ input: process.stdin, terminal: false });
+const engineReadline = (typeof readline !== 'undefined') ? readline : require('readline');
+const rl = engineReadline.createInterface({ input: process.stdin, terminal: false });
 
 rl.on('line', (line) => {
     line = line.trim();

@@ -80,6 +80,9 @@ function requestEngineMove(proc, fen) {
 }
 
 async function requestApiMove(fen) {
+    if (typeof fetch !== 'function') {
+        throw new Error('Global fetch is unavailable. Use Node.js 18+ to run this script.');
+    }
     const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -101,7 +104,7 @@ async function main() {
     let agreed = 0;
 
     try {
-        for (const fen of TEST_FENS.slice(0, Math.max(1, MAX_CASES))) {
+        for (const fen of TEST_FENS.slice(0, Math.max(0, MAX_CASES))) {
             const [engineMove, api] = await Promise.all([
                 requestEngineMove(proc, fen),
                 requestApiMove(fen)

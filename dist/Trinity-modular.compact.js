@@ -1209,7 +1209,8 @@ function move_to_uci(m) {
     return s;
 }
 
-const rl = readline.createInterface({ input: process.stdin, terminal: false });
+const engineReadline = (typeof readline !== 'undefined') ? readline : require('readline');
+const rl = engineReadline.createInterface({ input: process.stdin, terminal: false });
 
 rl.on('line', (line) => {
     line = line.trim();
