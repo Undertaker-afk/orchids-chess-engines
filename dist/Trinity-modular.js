@@ -824,7 +824,10 @@ function eval_pawns_raw() {
 
             // Isolated pawn penalty
             const neighbors = (f > 0 ? files[f - 1] : 0) + (f < 7 ? files[f + 1] : 0);
-            if (neighbors === 0) score -= 18 * sign;
+            if (neighbors === 0) {
+                score -= 18 * sign;
+                if (f === 0 || f === 7) score -= 10 * sign;
+            }
 
             // Connected pawn bonus
             if (neighbors > 0) score += 6 * sign;
@@ -938,6 +941,14 @@ function eval_king_safety() {
 
         score += (shield_bonus - attacker_score * 8) * sign;
     }
+
+    // Middlegame penalty for uncastled/centered kings.
+    if (phase > 10) {
+        const wk = king_sq[0], bk = king_sq[1];
+        if ((castle & 3) !== 3 && (wk === 4 || wk === 3 || wk === 5)) score -= 25;
+        if ((castle & 12) !== 12 && (bk === 116 || bk === 115 || bk === 117)) score += 25;
+    }
+
     return score;
 }
 
@@ -947,6 +958,8 @@ function eval_king_safety() {
 function eval_pieces() {
     let score = 0;
     let white_bishops = 0, black_bishops = 0;
+    let white_rook_a = -1, white_rook_b = -1;
+    let black_rook_a = -1, black_rook_b = -1;
 
     for (let sq = 0; sq < 128; sq++) {
         if (sq & 0x88) continue;
@@ -961,6 +974,14 @@ function eval_pieces() {
         }
 
         if (type === ROOK) {
+            if (color === WHITE) {
+                if (white_rook_a === -1) white_rook_a = sq;
+                else white_rook_b = sq;
+            } else {
+                if (black_rook_a === -1) black_rook_a = sq;
+                else black_rook_b = sq;
+            }
+
             const f = sq & 7;
             const r = sq >> 4;
             let own_pawn = false, enemy_pawn = false;
@@ -975,16 +996,41 @@ function eval_pieces() {
             const seventh_rank = color === WHITE ? 6 : 1;
             if (r === seventh_rank) score += 20 * sign;
 
-            // Bonus for developed rooks on active ranks.
-            if (r >= 3 && r <= 6) score += 10 * sign;
-            // Penalty for back-rank rook stagnation in earlier middlegame.
-            if ((phase < 18) && (r === 0 || r === 7)) score -= 15 * sign;
+            // Penalty for corner-stuck rooks in middlegame.
+            if (phase > 10 && r === 0 && (f === 0 || f === 7)) score -= 15 * sign;
+            if (phase > 10 && r === 7 && (f === 0 || f === 7)) score += 15 * sign;
         }
     }
 
     // Bishop pair bonus
-    if (white_bishops >= 2) score += 35;
-    if (black_bishops >= 2) score -= 35;
+    if (white_bishops >= 2) score += 50;
+    if (black_bishops >= 2) score -= 50;
+
+    // Connected rooks bonus: same rank/file with no blockers in between.
+    function connected_rooks_bonus(ra, rb, sign) {
+        if (ra === -1 || rb === -1) return 0;
+        const ra_f = ra & 7, ra_r = ra >> 4;
+        const rb_f = rb & 7, rb_r = rb >> 4;
+
+        if (ra_f === rb_f) {
+            const step = rb_r > ra_r ? 16 : -16;
+            for (let sq = ra + step; sq !== rb; sq += step) {
+                if (board[sq]) return 0;
+            }
+            return 14 * sign;
+        }
+        if (ra_r === rb_r) {
+            const step = rb_f > ra_f ? 1 : -1;
+            for (let sq = ra + step; sq !== rb; sq += step) {
+                if (board[sq]) return 0;
+            }
+            return 14 * sign;
+        }
+        return 0;
+    }
+
+    score += connected_rooks_bonus(white_rook_a, white_rook_b, 1);
+    score += connected_rooks_bonus(black_rook_a, black_rook_b, -1);
 
     return score;
 }
@@ -1029,7 +1075,12 @@ function eval_mobility() {
         if      (type === KNIGHT) score += (mob - 4) * 4 * sign;
         else if (type === BISHOP) score += (mob - 7) * 3 * sign;
         else if (type === ROOK)   score += (mob - 7) * 2 * sign;
-        else if (type === QUEEN)  score += (mob - 14) * 1 * sign;
+        else if (type === QUEEN) {
+            score += (mob - 14) * 1 * sign;
+            if (phase > 10 && mob < 8) {
+                score -= (8 - mob) * 12 * sign;
+            }
+        }
     }
     return score;
 }
@@ -1088,9 +1139,17 @@ function evaluate() {
             king_central = ((10 - w_dist) - (10 - b_dist)) * 4 * scale;
         }
     }
+
+    // Queen development penalty in opening/middlegame if still on start squares.
+    let queen_dev = 0;
+    if (phase > 12) {
+        if (board[3] === (QUEEN | WHITE)) queen_dev -= 25;      // d1
+        if (board[115] === (QUEEN | BLACK)) queen_dev += 25;    // d8
+    }
+
     const tempo        = 10; // Bonus for side to move
 
-    let total = piece_score + pawn_score + king_score + mob_score + piece_bonus + mopup + king_central + tempo;
+    let total = piece_score + pawn_score + king_score + mob_score + piece_bonus + mopup + king_central + queen_dev + tempo;
 
     // Dynamic contempt: discourage passive simplification in complex middlegames.
     let contempt = 0;
@@ -1098,7 +1157,7 @@ function evaluate() {
     if (phase > 12 && phase < 22 && material_approx < 600) {
         contempt = 8;
     }
-    total += contempt;
+    total += (side === WHITE ? contempt : -contempt);
 
     return side === WHITE ? total : -total;
 }

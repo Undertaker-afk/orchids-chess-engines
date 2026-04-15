@@ -1,0 +1,32 @@
+[
+  {
+    "ply": 10,
+    "timestamp": "2026-04-15T18:20:26.442Z",
+    "summary": "## Coaching Feedback (After ply 10)\n\n**1) Style Notes**\n- White has accepted an Isolated Queen's Pawn (IQP) structure after 5...d5 6.exd5 — a fighting stance\n- Minor piece coordination is loose: knights on b1 and d2 are passive, c1-bishop still at home\n- White plays materially (queen/dark-squared bishop on same diagonal) but Black has pinned the e4-pawn effectively\n- Position is defensible but requires precise development to equalize\n\n**2) Tactical Warning**\n- The e4-pawn is vulnerable to multi-piece attack: ...Qb6 and ...Bc5 threaten to pile up. If White's queen must move from d2 to defend e4, Black gains a winning initiative. **Calculate all queen moves with this pressure in mind.**\n\n**3) Concrete Tuning Idea**\n- Prioritize **king safety and piece connectivity** over material or space.\n- Suggested improvement: after playing Nf3 or g3 to connect rooks, strongly consider castling (0-0) rather than accepting a permanently open position with the IQP. Your current development is too slow to hold the central tension indefinitely."
+  },
+  {
+    "ply": 20,
+    "timestamp": "2026-04-15T18:20:53.063Z",
+    "summary": "1) Style notes\n- Good: Active piece development, early Nf3, central control with e4/d4\n- Good: Adapts well to closed positions (h4, b4, a3 - slow but methodical expansion)\n- Concern: Queen on d2 is passive and became a target\n- Concern: Rooks not coordinating; a1-rook is idle\n\n2) Tactical warning\n- **Your queen is trapped on d2** after 20...Bd2. Black's bishop controls the escape squares. If you try to save it, you'll lose big material. Accept the loss and focus on piece activity—your position is still playable.\n\n3) One concrete tuning idea for evaluation/search\n- In queenless midgames with development lead, **increase evaluation weight on rook activity**. Your a1-rook is undervalved; search should explore Rc1 or a4-a5 more aggressively rather than defensive moves like Kf1."
+  },
+  {
+    "ply": 30,
+    "timestamp": "2026-04-15T18:21:12.305Z",
+    "summary": "Let me analyze the position more carefully to provide accurate feedback.\n"
+  },
+  {
+    "ply": 40,
+    "timestamp": "2026-04-15T18:21:34.925Z",
+    "summary": "1) Style notes\n- You've been outmaneuvered in the center—gave up the e4 pawn and allowed Black's pieces to coordinate actively while your queen got trapped\n- Your bishop tour (e3-g5-c1-e3) was costly in time and gave Black免费 central pawn pushes\n- Black now has a dream position: e4 pawn blocking your pieces, rook on e-file potential, king safely tucked\n\n2) Tactical warning\n- At move 39, your queen on e2 is being attacked by the e4 pawn with no good squares—d1 is covered, d2 blocked by own c2-pawn, f1 covered. Your queen has nowhere safe to retreat. This is a critical positional error from move 36.\n\n3) One concrete tuning idea for evaluation/search\n- Your evaluation probably undervalues the \"queen in jeopardy\" penalty when the queen has restricted retreat squares. Add a penalty component for queen mobility when trapped near the edge—your engine likely saw the queen as safe on e2 but missed the lack of exit squares after ...e5-e4. Consider adding retreat-square analysis to your mobility scoring."
+  },
+  {
+    "ply": 50,
+    "timestamp": "2026-04-15T18:22:01.043Z",
+    "summary": "**1) Style notes**\n- Trinity playing passively after initiating complications (moves 41, 43, 45, 47, 49 show retreat-oriented choices)\n- White has a slight initiative but failed to push for advantage when Black's position was slightly loose (move 44...c6d4 was committal)\n- 49.h1f1 is defensive repositioning when more aggressive options existed\n\n**2) Tactical warning**\n- White missed a window to create real threats around move 44-46. Black's king was on g8 with limited squares; failing to apply pressure allowed Black to consolidate\n- Current position offers little tactical hope - Black is solid and up a pawn\n\n**3) One concrete tuning idea**\n- Add evaluation bonus for `active rook vs trapped rook` differential. Here Black's rook on e8 does nothing while White's rook on f1 also idle. Consider a bonus when your rook can threaten the opponent's king or infiltrate (e.g., Rc1-c7, Re7 patterns), encouraging earlier rook activation before recapturing pawns. Search should explore pawn breaks like h4-h5 before accepting positional trades."
+  },
+  {
+    "ply": 60,
+    "timestamp": "2026-04-15T18:22:29.583Z",
+    "summary": "**1) Style notes**\n- White's king safety deteriorated rapidly after move 45\n- The position became over defensive; pieces clustered without active counterplay\n- Pawn breaks (c2-c4 at 51) came too late and without supporting coordination\n\n**2) Tactical warning**\n- **CRITICAL**: After 60...f3g2#, White's queen-side rook on d1 is currently en prise to Black's queen AND the position is checkmate\n- Black's queen has been extremely active since moving to g2 (move 46)\n- White should have addressed queen threats earlier rather than drift\n\n**3) Tuning idea**\n- Increase penalty for queen placement on files/ranks penetrating into opponent's position, especially near enemy king\n- The evaluation likely underweighted how dangerous Black's queen became at g2 — consider adding dynamic bonus for queen mobility in attacking zones adjacent to king\n\n*Note: Move 60 appears to deliver checkmate. If this was a resignation point, suggest earlier at move 52-54 when queen first became active.*"
+  }
+]

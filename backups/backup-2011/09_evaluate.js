@@ -35,10 +35,7 @@ function eval_pawns_raw() {
 
             // Isolated pawn penalty
             const neighbors = (f > 0 ? files[f - 1] : 0) + (f < 7 ? files[f + 1] : 0);
-            if (neighbors === 0) {
-                score -= 18 * sign;
-                if (f === 0 || f === 7) score -= 10 * sign;
-            }
+            if (neighbors === 0) score -= 18 * sign;
 
             // Connected pawn bonus
             if (neighbors > 0) score += 6 * sign;
@@ -152,14 +149,6 @@ function eval_king_safety() {
 
         score += (shield_bonus - attacker_score * 8) * sign;
     }
-
-    // Middlegame penalty for uncastled/centered kings.
-    if (phase > 10) {
-        const wk = king_sq[0], bk = king_sq[1];
-        if ((castle & 3) !== 3 && (wk === 4 || wk === 3 || wk === 5)) score -= 25;
-        if ((castle & 12) !== 12 && (bk === 116 || bk === 115 || bk === 117)) score += 25;
-    }
-
     return score;
 }
 
@@ -207,9 +196,10 @@ function eval_pieces() {
             const seventh_rank = color === WHITE ? 6 : 1;
             if (r === seventh_rank) score += 20 * sign;
 
-            // Penalty for corner-stuck rooks in middlegame.
-            if (phase > 10 && r === 0 && (f === 0 || f === 7)) score -= 15 * sign;
-            if (phase > 10 && r === 7 && (f === 0 || f === 7)) score += 15 * sign;
+            // Bonus for developed rooks on active ranks.
+            if (r >= 3 && r <= 6) score += 10 * sign;
+            // Penalty for back-rank rook stagnation in earlier middlegame.
+            if ((phase < 18) && (r === 0 || r === 7)) score -= 15 * sign;
         }
     }
 
@@ -286,12 +276,7 @@ function eval_mobility() {
         if      (type === KNIGHT) score += (mob - 4) * 4 * sign;
         else if (type === BISHOP) score += (mob - 7) * 3 * sign;
         else if (type === ROOK)   score += (mob - 7) * 2 * sign;
-        else if (type === QUEEN) {
-            score += (mob - 14) * 1 * sign;
-            if (phase > 10 && mob < 8) {
-                score -= (8 - mob) * 12 * sign;
-            }
-        }
+        else if (type === QUEEN)  score += (mob - 14) * 1 * sign;
     }
     return score;
 }
