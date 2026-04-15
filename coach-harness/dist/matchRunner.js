@@ -73,7 +73,7 @@ class MatchRunner extends events_1.EventEmitter {
                     this.state.stockfishMoves.push(moveUci);
                 this.state.ply = ply;
                 this.state.fen = board.fen();
-                fs_1.default.appendFileSync(path_1.default.join(this.outDir, "events.ndjson"), JSON.stringify(ev) + "\n", "utf8");
+                this.persistArtifacts();
                 if (this.config.coachEnabled && ply % this.config.coachEveryNPlies === 0) {
                     const insight = await (0, coachClient_1.requestCoachInsight)({
                         config: this.config,
@@ -82,7 +82,7 @@ class MatchRunner extends events_1.EventEmitter {
                         ply
                     });
                     this.state.insights.push(insight);
-                    fs_1.default.appendFileSync(path_1.default.join(this.outDir, "coach.ndjson"), JSON.stringify(insight) + "\n", "utf8");
+                    this.persistArtifacts();
                 }
                 if (board.isGameOver()) {
                     this.state.result = inferResult(board, engine);
@@ -99,18 +99,23 @@ class MatchRunner extends events_1.EventEmitter {
             }
             this.state.endedAt = new Date().toISOString();
             this.emitUpdate();
-            fs_1.default.writeFileSync(path_1.default.join(this.outDir, "report.json"), JSON.stringify(this.state, null, 2), "utf8");
+            this.persistArtifacts();
         }
         catch (err) {
             this.state.status = "error";
             this.state.error = err?.message || String(err);
             this.state.endedAt = new Date().toISOString();
             this.emitUpdate();
-            fs_1.default.writeFileSync(path_1.default.join(this.outDir, "report.json"), JSON.stringify(this.state, null, 2), "utf8");
+            this.persistArtifacts();
         }
         finally {
             stockfish.stop();
         }
+    }
+    persistArtifacts() {
+        fs_1.default.writeFileSync(path_1.default.join(this.outDir, "events.json"), JSON.stringify(this.state.moves, null, 2), "utf8");
+        fs_1.default.writeFileSync(path_1.default.join(this.outDir, "coach.json"), JSON.stringify(this.state.insights, null, 2), "utf8");
+        fs_1.default.writeFileSync(path_1.default.join(this.outDir, "report.json"), JSON.stringify(this.state, null, 2), "utf8");
     }
     emitUpdate() {
         this.emit("update", this.state);

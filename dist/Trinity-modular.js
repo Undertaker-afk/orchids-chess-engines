@@ -1369,7 +1369,9 @@ function search(depth, alpha, beta, is_pv, prev_move) {
 // ---------------------------------------------------------------------------
 function search_root() {
     nodes = 0; stop_search = false;
-    start_time = now(); stop_time = start_time + MOVE_TIME_MS;
+    const time_limits = get_time_limits_ms(MOVE_TIME_MS);
+    const initial_budget_ms = compute_search_time_budget_ms(MOVE_TIME_MS, phase, halfmove);
+    start_time = now(); stop_time = start_time + initial_budget_ms;
 
     // Reset per-search heuristics
     killers.fill(0);
@@ -1378,6 +1380,7 @@ function search_root() {
     const count        = generate_moves(0, false);
     let best_move_root = 0;
     let prev_score     = 0;
+    let previous_iteration_best = 0;
 
     for (let d = 1; d <= 64; d++) {
         // Set up aspiration window
@@ -1435,7 +1438,14 @@ function search_root() {
         }
 
         if (stop_search) break;
-        if (iter_best_move) { best_move_root = iter_best_move; prev_score = iter_best_score; }
+        if (iter_best_move) {
+            if (previous_iteration_best && iter_best_move !== previous_iteration_best) {
+                stop_time = Math.min(start_time + time_limits.max, stop_time + time_limits.instability_bonus);
+            }
+            best_move_root = iter_best_move;
+            prev_score = iter_best_score;
+            previous_iteration_best = iter_best_move;
+        }
         // Early exit on forced mate/loss
         if (prev_score > 20000 || prev_score < -20000) break;
     }
@@ -1575,3 +1585,37 @@ rl.on('line', (line) => {
         process.stdout.write('0000\n');
     }
 });
+
+// @module time
+// ==============================================================================
+// DYNAMIC TIME MANAGEMENT
+// Adapts root search time around configured MOVE_TIME_MS based on position phase
+// and root instability (best move changes between iterations).
+// ==============================================================================
+
+function clamp(x, lo, hi) {
+    return x < lo ? lo : (x > hi ? hi : x);
+}
+
+function get_time_limits_ms(base_ms) {
+    const base = Math.max(1, base_ms | 0);
+    return {
+        min: Math.max(50, Math.floor(base * 0.45)),
+        max: Math.max(100, Math.floor(base * 1.75)),
+        instability_bonus: Math.max(20, Math.floor(base * 0.10))
+    };
+}
+
+function compute_search_time_budget_ms(base_ms, phase_value, halfmove_clock) {
+    const limits = get_time_limits_ms(base_ms);
+
+    // More time in endgames (phase low), less in quiet opening book-like positions.
+    let scale = 1.0;
+    if (phase_value >= 18) scale -= 0.12;
+    if (phase_value <= 8) scale += 0.18;
+
+    // Slight boost in very early moves where opening choice matters.
+    if (halfmove_clock <= 8) scale += 0.06;
+
+    return clamp(Math.floor(base_ms * scale), limits.min, limits.max);
+}
