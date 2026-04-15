@@ -81,66 +81,38 @@ const ATK_WEIGHT = [0, 0, 2, 2, 3, 5, 0]; // index = piece type
 function eval_king_safety() {
     let score = 0;
     for (const color of [WHITE, BLACK]) {
-        const sign = color === WHITE ? 1 : -1;
-        const ksq  = king_sq[color === WHITE ? 0 : 1];
+        const sign  = color === WHITE ? 1 : -1;
+        const ksq   = king_sq[color === WHITE ? 0 : 1];
         if (!ksq) continue;
+        const f = ksq & 7, r = ksq >> 4;
         const enemy = color ^ 24;
 
-        // 1) Pawn shield directly in front of king.
-        const shield_r = (ksq >> 4) + (color === WHITE ? 1 : -1);
+        // Pawn shield: pawns directly in front of king (+2 files)
+        const shield_r = r + (color === WHITE ? 1 : -1);
         let shield_bonus = 0;
         if (shield_r >= 0 && shield_r < 8) {
-            const kf = ksq & 7;
-            const left = Math.max(0, kf - 1);
-            const right = Math.min(7, kf + 1);
-            for (let ff = left; ff <= right; ff++) {
+            for (let ff = Math.max(0, f - 1); ff <= Math.min(7, f + 1); ff++) {
                 if (board[shield_r * 16 + ff] === (PAWN | color)) shield_bonus += 14;
             }
         }
 
-        // 2) Fast attacker count near king zone.
-        const n0 = ksq - 17, n1 = ksq - 16, n2 = ksq - 15, n3 = ksq - 1;
-        const n4 = ksq + 1, n5 = ksq + 15, n6 = ksq + 16, n7 = ksq + 17;
-
+        // Enemy attacker penalty: scan all enemy pieces that cover a square
+        // adjacent to our king
         let attacker_score = 0;
         for (let sq = 0; sq < 128; sq++) {
             if (sq & 0x88) continue;
             const pc = board[sq];
             if (!pc || (pc & 24) !== enemy) continue;
-
             const type = pc & 7;
             if (type === PAWN || type === KING) continue;
-
-            let attacks = false;
-            if (type === KNIGHT) {
-                const diff = sq - ksq;
-                attacks = (
-                    diff === 33 || diff === 31 || diff === 18 || diff === 14 ||
-                    diff === -14 || diff === -18 || diff === -31 || diff === -33
-                );
-            } else {
-                const dirs = type === BISHOP
-                    ? [-17, -15, 15, 17]
-                    : type === ROOK
-                        ? [-16, -1, 1, 16]
-                        : [-17, -16, -15, -1, 1, 15, 16, 17];
-
-                for (let i = 0; i < dirs.length; i++) {
-                    const step = dirs[i];
-                    let c = sq + step;
-                    while (!(c & 0x88)) {
-                        if (c === ksq || c === n0 || c === n1 || c === n2 || c === n3 || c === n4 || c === n5 || c === n6 || c === n7) {
-                            attacks = true;
-                            break;
-                        }
-                        if (board[c]) break;
-                        c += step;
-                    }
-                    if (attacks) break;
+            for (const d of piece_dirs[KING]) {
+                const asq = ksq + d;
+                if (asq & 0x88) continue;
+                if (is_piece_attacking(sq, asq, type, enemy)) {
+                    attacker_score += ATK_WEIGHT[type];
+                    break;
                 }
             }
-
-            if (attacks) attacker_score += ATK_WEIGHT[type];
         }
 
         score += (shield_bonus - attacker_score * 8) * sign;

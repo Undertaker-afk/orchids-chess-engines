@@ -33,9 +33,8 @@ function score_move(m, hash_move, prev_move) {
     if (prom) return 900_000 + PIECE_VAL[prom & 7];
 
     // Killer moves (quiet moves that previously caused beta-cutoffs at this ply)
-    const kidx = ply * 2;
-    if (m === killers[kidx]) return 800_000;
-    if (m === killers[kidx + 1]) return 700_000;
+    if (m === killers[ply][0]) return 800_000;
+    if (m === killers[ply][1]) return 700_000;
 
     // Countermove (quiet move that responds well to the previous opponent move)
     if (prev_move) {

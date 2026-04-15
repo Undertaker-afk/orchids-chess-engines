@@ -65,7 +65,7 @@ const move_scores = new Int32Array(MAX_PLY * 256);
 // ==============================================================================
 
 // Killer moves: two quiet moves per ply that caused a beta-cutoff
-const killers = new Int32Array(MAX_PLY * 2); // [ply*2], [ply*2+1]
+const killers = Array.from({ length: MAX_PLY }, () => new Int32Array(2));
 
 // History heuristic: indexed by [from*128 + to]
 const history = new Int32Array(16384);
@@ -73,22 +73,19 @@ const history = new Int32Array(16384);
 // Countermove heuristic: response to a given move [from*128 + to] → counter move
 const countermove = new Int32Array(16384);
 
-// LMR reduction table: lmr_table[depth * 64 + move_index]
-const lmr_table = new Int32Array(64 * 64);
-for (let d = 0; d < 64; d++) {
-    for (let m = 0; m < 64; m++) {
-        lmr_table[d * 64 + m] = (d === 0 || m === 0)
-            ? 0
-            : Math.max(0, Math.floor(0.75 + Math.log(d) * Math.log(m) / 2.25));
-    }
-}
+// LMR reduction table: lmr_table[depth][move_index]
+const lmr_table = Array.from({ length: 64 }, (_, d) =>
+    Array.from({ length: 64 }, (_, m) => {
+        if (d === 0 || m === 0) return 0;
+        return Math.max(0, Math.floor(0.75 + Math.log(d) * Math.log(m) / 2.25));
+    })
+);
 
 // ==============================================================================
 // SEARCH TIMING
 // ==============================================================================
 const MOVE_TIME_MS   = cliOptions.moveTimeMs;
 const TIME_CHECK_MASK = 511; // check time every 512 nodes
-const now = typeof performance !== 'undefined' ? performance.now.bind(performance) : Date.now;
 
 let nodes       = 0;
 let stop_search = false;

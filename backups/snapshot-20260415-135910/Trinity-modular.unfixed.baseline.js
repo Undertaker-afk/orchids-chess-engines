@@ -177,14 +177,7 @@ let hash_lo = 0, hash_hi = 0;
 // Pawn-only hash for the pawn structure cache
 let pawn_hash_lo = 0, pawn_hash_hi = 0;
 
-let zobrist_seed = 0x6b8b4567;
-
-function rand32() {
-	zobrist_seed ^= zobrist_seed << 13;
-	zobrist_seed ^= zobrist_seed >>> 17;
-	zobrist_seed ^= zobrist_seed << 5;
-	return zobrist_seed | 0;
-}
+function rand32() { return (Math.random() * 0x100000000) | 0; }
 
 for (let i = 0; i < 14 * 128; i++) { z_lo[i] = rand32(); z_hi[i] = rand32(); }
 for (let i = 0; i < 16;  i++)      { z_castle_lo[i] = rand32(); z_castle_hi[i] = rand32(); }
@@ -258,7 +251,7 @@ const move_scores = new Int32Array(MAX_PLY * 256);
 // ==============================================================================
 
 // Killer moves: two quiet moves per ply that caused a beta-cutoff
-const killers = new Int32Array(MAX_PLY * 2); // [ply*2], [ply*2+1]
+const killers = Array.from({ length: MAX_PLY }, () => new Int32Array(2));
 
 // History heuristic: indexed by [from*128 + to]
 const history = new Int32Array(16384);
@@ -266,22 +259,19 @@ const history = new Int32Array(16384);
 // Countermove heuristic: response to a given move [from*128 + to] → counter move
 const countermove = new Int32Array(16384);
 
-// LMR reduction table: lmr_table[depth * 64 + move_index]
-const lmr_table = new Int32Array(64 * 64);
-for (let d = 0; d < 64; d++) {
-    for (let m = 0; m < 64; m++) {
-        lmr_table[d * 64 + m] = (d === 0 || m === 0)
-            ? 0
-            : Math.max(0, Math.floor(0.75 + Math.log(d) * Math.log(m) / 2.25));
-    }
-}
+// LMR reduction table: lmr_table[depth][move_index]
+const lmr_table = Array.from({ length: 64 }, (_, d) =>
+    Array.from({ length: 64 }, (_, m) => {
+        if (d === 0 || m === 0) return 0;
+        return Math.max(0, Math.floor(0.75 + Math.log(d) * Math.log(m) / 2.25));
+    })
+);
 
 // ==============================================================================
 // SEARCH TIMING
 // ==============================================================================
 const MOVE_TIME_MS   = cliOptions.moveTimeMs;
 const TIME_CHECK_MASK = 511; // check time every 512 nodes
-const now = typeof performance !== 'undefined' ? performance.now.bind(performance) : Date.now;
 
 let nodes       = 0;
 let stop_search = false;
@@ -869,66 +859,38 @@ const ATK_WEIGHT = [0, 0, 2, 2, 3, 5, 0]; // index = piece type
 function eval_king_safety() {
     let score = 0;
     for (const color of [WHITE, BLACK]) {
-        const sign = color === WHITE ? 1 : -1;
-        const ksq  = king_sq[color === WHITE ? 0 : 1];
+        const sign  = color === WHITE ? 1 : -1;
+        const ksq   = king_sq[color === WHITE ? 0 : 1];
         if (!ksq) continue;
+        const f = ksq & 7, r = ksq >> 4;
         const enemy = color ^ 24;
 
-        // 1) Pawn shield directly in front of king.
-        const shield_r = (ksq >> 4) + (color === WHITE ? 1 : -1);
+        // Pawn shield: pawns directly in front of king (+2 files)
+        const shield_r = r + (color === WHITE ? 1 : -1);
         let shield_bonus = 0;
         if (shield_r >= 0 && shield_r < 8) {
-            const kf = ksq & 7;
-            const left = Math.max(0, kf - 1);
-            const right = Math.min(7, kf + 1);
-            for (let ff = left; ff <= right; ff++) {
+            for (let ff = Math.max(0, f - 1); ff <= Math.min(7, f + 1); ff++) {
                 if (board[shield_r * 16 + ff] === (PAWN | color)) shield_bonus += 14;
             }
         }
 
-        // 2) Fast attacker count near king zone.
-        const n0 = ksq - 17, n1 = ksq - 16, n2 = ksq - 15, n3 = ksq - 1;
-        const n4 = ksq + 1, n5 = ksq + 15, n6 = ksq + 16, n7 = ksq + 17;
-
+        // Enemy attacker penalty: scan all enemy pieces that cover a square
+        // adjacent to our king
         let attacker_score = 0;
         for (let sq = 0; sq < 128; sq++) {
             if (sq & 0x88) continue;
             const pc = board[sq];
             if (!pc || (pc & 24) !== enemy) continue;
-
             const type = pc & 7;
             if (type === PAWN || type === KING) continue;
-
-            let attacks = false;
-            if (type === KNIGHT) {
-                const diff = sq - ksq;
-                attacks = (
-                    diff === 33 || diff === 31 || diff === 18 || diff === 14 ||
-                    diff === -14 || diff === -18 || diff === -31 || diff === -33
-                );
-            } else {
-                const dirs = type === BISHOP
-                    ? [-17, -15, 15, 17]
-                    : type === ROOK
-                        ? [-16, -1, 1, 16]
-                        : [-17, -16, -15, -1, 1, 15, 16, 17];
-
-                for (let i = 0; i < dirs.length; i++) {
-                    const step = dirs[i];
-                    let c = sq + step;
-                    while (!(c & 0x88)) {
-                        if (c === ksq || c === n0 || c === n1 || c === n2 || c === n3 || c === n4 || c === n5 || c === n6 || c === n7) {
-                            attacks = true;
-                            break;
-                        }
-                        if (board[c]) break;
-                        c += step;
-                    }
-                    if (attacks) break;
+            for (const d of piece_dirs[KING]) {
+                const asq = ksq + d;
+                if (asq & 0x88) continue;
+                if (is_piece_attacking(sq, asq, type, enemy)) {
+                    attacker_score += ATK_WEIGHT[type];
+                    break;
                 }
             }
-
-            if (attacks) attacker_score += ATK_WEIGHT[type];
         }
 
         score += (shield_bonus - attacker_score * 8) * sign;
@@ -1088,9 +1050,8 @@ function score_move(m, hash_move, prev_move) {
     if (prom) return 900_000 + PIECE_VAL[prom & 7];
 
     // Killer moves (quiet moves that previously caused beta-cutoffs at this ply)
-    const kidx = ply * 2;
-    if (m === killers[kidx]) return 800_000;
-    if (m === killers[kidx + 1]) return 700_000;
+    if (m === killers[ply][0]) return 800_000;
+    if (m === killers[ply][1]) return 700_000;
 
     // Countermove (quiet move that responds well to the previous opponent move)
     if (prev_move) {
@@ -1148,17 +1109,15 @@ function sort_moves(offset, count, hash_move, prev_move) {
 // Quiescence Search
 // ---------------------------------------------------------------------------
 function quiesce(alpha, beta) {
-    if ((nodes++ & TIME_CHECK_MASK) === 0 && now() >= stop_time) stop_search = true;
+    if ((nodes++ & TIME_CHECK_MASK) === 0 && Date.now() >= stop_time) stop_search = true;
     if (stop_search) return 0;
     if (ply >= 511) return evaluate();
 
-    const static_eval = evaluate();
-    const stand_pat = static_eval;
+    const stand_pat = evaluate();
     if (stand_pat >= beta) return beta;
     if (alpha < stand_pat) alpha = stand_pat;
-    // Adaptive delta pruning to match higher eval variance.
-    const delta_margin = Math.max(950, Math.abs(static_eval) * 0.35 + 800);
-    if (stand_pat < alpha - delta_margin) return alpha;
+    // Delta pruning: if even a queen capture can't improve alpha, bail early
+    if (stand_pat < alpha - 1075) return alpha;
 
     const offset = ply * 256;
     let count = generate_moves(ply, true);
@@ -1187,19 +1146,15 @@ function quiesce(alpha, beta) {
 // Main Alpha-Beta Search (PVS)
 // ---------------------------------------------------------------------------
 function search(depth, alpha, beta, is_pv, prev_move) {
-    if ((nodes++ & TIME_CHECK_MASK) === 0 && now() >= stop_time) stop_search = true;
+    if ((nodes++ & TIME_CHECK_MASK) === 0 && Date.now() >= stop_time) stop_search = true;
     if (stop_search) return 0;
     if (ply >= 511) return evaluate();
 
     // Repetition / 50-move draw
     if (ply > 0 && halfmove >= 100) return 0;
     const rep_limit = Math.max(0, ply - halfmove);
-    let rep_count = 0;
     for (let i = ply - 2; i >= rep_limit; i -= 2) {
-        if (state_hash_lo[i] === hash_lo && state_hash_hi[i] === hash_hi) {
-            rep_count++;
-            if (rep_count >= 2) return 0;
-        }
+        if (state_hash_lo[i] === hash_lo && state_hash_hi[i] === hash_hi) return 0;
     }
 
     const in_check = is_attacked(king_sq[side === WHITE ? 0 : 1], side ^ 24);
@@ -1292,7 +1247,7 @@ function search(depth, alpha, beta, is_pv, prev_move) {
             if (depth >= 2 && !in_check && is_quiet && legal > 3) {
                 const d_idx = Math.min(depth, 63);
                 const m_idx = Math.min(legal, 63);
-                reduction   = lmr_table[d_idx * 64 + m_idx];
+                reduction   = lmr_table[d_idx][m_idx];
                 if (is_pv) reduction = Math.max(0, reduction - 1);
             }
 
@@ -1315,13 +1270,14 @@ function search(depth, alpha, beta, is_pv, prev_move) {
             if (score >= beta) {
                 // Beta-cutoff: update move ordering heuristics
                 if (is_quiet) {
-                    const kidx = ply * 2;
-                    killers[kidx + 1] = killers[kidx];
-                    killers[kidx] = m;
+                    killers[ply][1] = killers[ply][0];
+                    killers[ply][0] = m;
                     const hkey = ((m & 127) << 7) | ((m >> 7) & 127);
                     history[hkey] += depth * depth;
-                    // Saturating clamp avoids O(N) table decay in this hot path.
-                    if (history[hkey] > 32000) history[hkey] = 16000;
+                    // Prevent history overflow
+                    if (history[hkey] > 1_000_000) {
+                        for (let k = 0; k < 16384; k++) history[k] >>= 2;
+                    }
                     if (prev_move) {
                         const cm_key = ((prev_move & 127) << 7) | ((prev_move >> 7) & 127);
                         countermove[cm_key] = m;
@@ -1354,10 +1310,10 @@ function search(depth, alpha, beta, is_pv, prev_move) {
 // ---------------------------------------------------------------------------
 function search_root() {
     nodes = 0; stop_search = false;
-    start_time = now(); stop_time = start_time + MOVE_TIME_MS;
+    start_time = Date.now(); stop_time = start_time + MOVE_TIME_MS;
 
     // Reset per-search heuristics
-    killers.fill(0);
+    for (let i = 0; i < MAX_PLY; i++) { killers[i][0] = 0; killers[i][1] = 0; }
     for (let i = 0; i < 16384; i++)   { history[i] >>= 2; }
 
     const count        = generate_moves(0, false);

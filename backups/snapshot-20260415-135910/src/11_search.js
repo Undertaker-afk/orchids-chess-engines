@@ -22,17 +22,15 @@
 // Quiescence Search
 // ---------------------------------------------------------------------------
 function quiesce(alpha, beta) {
-    if ((nodes++ & TIME_CHECK_MASK) === 0 && now() >= stop_time) stop_search = true;
+    if ((nodes++ & TIME_CHECK_MASK) === 0 && Date.now() >= stop_time) stop_search = true;
     if (stop_search) return 0;
     if (ply >= 511) return evaluate();
 
-    const static_eval = evaluate();
-    const stand_pat = static_eval;
+    const stand_pat = evaluate();
     if (stand_pat >= beta) return beta;
     if (alpha < stand_pat) alpha = stand_pat;
-    // Adaptive delta pruning to match higher eval variance.
-    const delta_margin = Math.max(950, Math.abs(static_eval) * 0.35 + 800);
-    if (stand_pat < alpha - delta_margin) return alpha;
+    // Delta pruning: if even a queen capture can't improve alpha, bail early
+    if (stand_pat < alpha - 1075) return alpha;
 
     const offset = ply * 256;
     let count = generate_moves(ply, true);
@@ -61,7 +59,7 @@ function quiesce(alpha, beta) {
 // Main Alpha-Beta Search (PVS)
 // ---------------------------------------------------------------------------
 function search(depth, alpha, beta, is_pv, prev_move) {
-    if ((nodes++ & TIME_CHECK_MASK) === 0 && now() >= stop_time) stop_search = true;
+    if ((nodes++ & TIME_CHECK_MASK) === 0 && Date.now() >= stop_time) stop_search = true;
     if (stop_search) return 0;
     if (ply >= 511) return evaluate();
 
@@ -166,7 +164,7 @@ function search(depth, alpha, beta, is_pv, prev_move) {
             if (depth >= 2 && !in_check && is_quiet && legal > 3) {
                 const d_idx = Math.min(depth, 63);
                 const m_idx = Math.min(legal, 63);
-                reduction   = lmr_table[d_idx * 64 + m_idx];
+                reduction   = lmr_table[d_idx][m_idx];
                 if (is_pv) reduction = Math.max(0, reduction - 1);
             }
 
@@ -189,9 +187,8 @@ function search(depth, alpha, beta, is_pv, prev_move) {
             if (score >= beta) {
                 // Beta-cutoff: update move ordering heuristics
                 if (is_quiet) {
-                    const kidx = ply * 2;
-                    killers[kidx + 1] = killers[kidx];
-                    killers[kidx] = m;
+                    killers[ply][1] = killers[ply][0];
+                    killers[ply][0] = m;
                     const hkey = ((m & 127) << 7) | ((m >> 7) & 127);
                     history[hkey] += depth * depth;
                     // Saturating clamp avoids O(N) table decay in this hot path.
@@ -228,10 +225,10 @@ function search(depth, alpha, beta, is_pv, prev_move) {
 // ---------------------------------------------------------------------------
 function search_root() {
     nodes = 0; stop_search = false;
-    start_time = now(); stop_time = start_time + MOVE_TIME_MS;
+    start_time = Date.now(); stop_time = start_time + MOVE_TIME_MS;
 
     // Reset per-search heuristics
-    killers.fill(0);
+    for (let i = 0; i < MAX_PLY; i++) { killers[i][0] = 0; killers[i][1] = 0; }
     for (let i = 0; i < 16384; i++)   { history[i] >>= 2; }
 
     const count        = generate_moves(0, false);
