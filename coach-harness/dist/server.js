@@ -11,6 +11,14 @@ dotenv_1.default.config({ path: path_1.default.resolve(process.cwd(), "../.env")
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json({ limit: "1mb" }));
+app.use((_req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+    if (_req.method === "OPTIONS")
+        return res.status(204).end();
+    next();
+});
 const publicDir = path_1.default.resolve(process.cwd(), "public");
 const matches = new Map();
 const runners = new Map();
