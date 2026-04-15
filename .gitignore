@@ -1,0 +1,9 @@
+/turnaments
+/__pycache__
+/tournament/endgame/
+runner_key.txt
+/node_modules
+/tournament_js
+key.pem
+node_modules
+.venv
