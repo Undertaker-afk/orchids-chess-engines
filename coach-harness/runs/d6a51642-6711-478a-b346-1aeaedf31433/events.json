@@ -1,0 +1,128 @@
+[
+  {
+    "ply": 1,
+    "fenBefore": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    "fenAfter": "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1",
+    "moveUci": "d2d4",
+    "engine": "Trinity",
+    "legal": true,
+    "timestamp": "2026-04-15T17:38:32.783Z"
+  },
+  {
+    "ply": 2,
+    "fenBefore": "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1",
+    "fenAfter": "rnbqkb1r/pppppppp/5n2/8/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 1 2",
+    "moveUci": "g8f6",
+    "engine": "Stockfish",
+    "legal": true,
+    "timestamp": "2026-04-15T17:38:33.994Z"
+  },
+  {
+    "ply": 3,
+    "fenBefore": "rnbqkb1r/pppppppp/5n2/8/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 1 2",
+    "fenAfter": "rnbqkb1r/pppppppp/5n2/8/3P4/2N5/PPP1PPPP/R1BQKBNR b KQkq - 2 2",
+    "moveUci": "b1c3",
+    "engine": "Trinity",
+    "legal": true,
+    "timestamp": "2026-04-15T17:38:36.318Z"
+  },
+  {
+    "ply": 4,
+    "fenBefore": "rnbqkb1r/pppppppp/5n2/8/3P4/2N5/PPP1PPPP/R1BQKBNR b KQkq - 2 2",
+    "fenAfter": "rnbqkb1r/ppp1pppp/5n2/3p4/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq - 0 3",
+    "moveUci": "d7d5",
+    "engine": "Stockfish",
+    "legal": true,
+    "timestamp": "2026-04-15T17:38:37.524Z"
+  },
+  {
+    "ply": 5,
+    "fenBefore": "rnbqkb1r/ppp1pppp/5n2/3p4/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq - 0 3",
+    "fenAfter": "rnbqkb1r/ppp1pppp/5n2/3p4/3P4/2N2N2/PPP1PPPP/R1BQKB1R b KQkq - 1 3",
+    "moveUci": "g1f3",
+    "engine": "Trinity",
+    "legal": true,
+    "timestamp": "2026-04-15T17:38:39.146Z"
+  },
+  {
+    "ply": 6,
+    "fenBefore": "rnbqkb1r/ppp1pppp/5n2/3p4/3P4/2N2N2/PPP1PPPP/R1BQKB1R b KQkq - 1 3",
+    "fenAfter": "rnbqkb1r/ppp2ppp/4pn2/3p4/3P4/2N2N2/PPP1PPPP/R1BQKB1R w KQkq - 0 4",
+    "moveUci": "e7e6",
+    "engine": "Stockfish",
+    "legal": true,
+    "timestamp": "2026-04-15T17:38:40.353Z"
+  },
+  {
+    "ply": 7,
+    "fenBefore": "rnbqkb1r/ppp2ppp/4pn2/3p4/3P4/2N2N2/PPP1PPPP/R1BQKB1R w KQkq - 0 4",
+    "fenAfter": "rnbqkb1r/ppp2ppp/4pn2/3p2B1/3P4/2N2N2/PPP1PPPP/R2QKB1R b KQkq - 1 4",
+    "moveUci": "c1g5",
+    "engine": "Trinity",
+    "legal": true,
+    "timestamp": "2026-04-15T17:38:42.157Z"
+  },
+  {
+    "ply": 8,
+    "fenBefore": "rnbqkb1r/ppp2ppp/4pn2/3p2B1/3P4/2N2N2/PPP1PPPP/R2QKB1R b KQkq - 1 4",
+    "fenAfter": "rnbqk2r/ppp2ppp/4pn2/3p2B1/1b1P4/2N2N2/PPP1PPPP/R2QKB1R w KQkq - 2 5",
+    "moveUci": "f8b4",
+    "engine": "Stockfish",
+    "legal": true,
+    "timestamp": "2026-04-15T17:38:43.365Z"
+  },
+  {
+    "ply": 9,
+    "fenBefore": "rnbqk2r/ppp2ppp/4pn2/3p2B1/1b1P4/2N2N2/PPP1PPPP/R2QKB1R w KQkq - 2 5",
+    "fenAfter": "rnbqk2r/ppp2ppp/4pB2/3p4/1b1P4/2N2N2/PPP1PPPP/R2QKB1R b KQkq - 0 5",
+    "moveUci": "g5f6",
+    "engine": "Trinity",
+    "legal": true,
+    "timestamp": "2026-04-15T17:38:45.088Z"
+  },
+  {
+    "ply": 10,
+    "fenBefore": "rnbqk2r/ppp2ppp/4pB2/3p4/1b1P4/2N2N2/PPP1PPPP/R2QKB1R b KQkq - 0 5",
+    "fenAfter": "rnb1k2r/ppp2ppp/4pq2/3p4/1b1P4/2N2N2/PPP1PPPP/R2QKB1R w KQkq - 0 6",
+    "moveUci": "d8f6",
+    "engine": "Stockfish",
+    "legal": true,
+    "timestamp": "2026-04-15T17:38:46.295Z"
+  },
+  {
+    "ply": 11,
+    "fenBefore": "rnb1k2r/ppp2ppp/4pq2/3p4/1b1P4/2N2N2/PPP1PPPP/R2QKB1R w KQkq - 0 6",
+    "fenAfter": "rnb1k2r/ppp2ppp/4pq2/3p4/1b1P4/2N1PN2/PPP2PPP/R2QKB1R b KQkq - 0 6",
+    "moveUci": "e2e3",
+    "engine": "Trinity",
+    "legal": true,
+    "timestamp": "2026-04-15T17:39:02.942Z"
+  },
+  {
+    "ply": 12,
+    "fenBefore": "rnb1k2r/ppp2ppp/4pq2/3p4/1b1P4/2N1PN2/PPP2PPP/R2QKB1R b KQkq - 0 6",
+    "fenAfter": "rnb1k2r/pp3ppp/4pq2/2pp4/1b1P4/2N1PN2/PPP2PPP/R2QKB1R w KQkq - 0 7",
+    "moveUci": "c7c5",
+    "engine": "Stockfish",
+    "legal": true,
+    "timestamp": "2026-04-15T17:39:04.169Z"
+  },
+  {
+    "ply": 13,
+    "fenBefore": "rnb1k2r/pp3ppp/4pq2/2pp4/1b1P4/2N1PN2/PPP2PPP/R2QKB1R w KQkq - 0 7",
+    "fenAfter": "rnb1k2r/pp3ppp/4pq2/2pp4/1b1P4/2N1PN2/PPPQ1PPP/R3KB1R b KQkq - 1 7",
+    "moveUci": "d1d2",
+    "engine": "Trinity",
+    "legal": true,
+    "timestamp": "2026-04-15T17:39:06.111Z"
+  },
+  {
+    "ply": 14,
+    "fenBefore": "rnb1k2r/pp3ppp/4pq2/2pp4/1b1P4/2N1PN2/PPPQ1PPP/R3KB1R b KQkq - 1 7",
+    "fenAfter": "rnb1k2r/pp3ppp/4pq2/3p4/1b1p4/2N1PN2/PPPQ1PPP/R3KB1R w KQkq - 0 8",
+    "moveUci": "c5d4",
+    "engine": "Stockfish",
+    "legal": true,
+    "timestamp": "2026-04-15T17:39:07.318Z"
+  }
+]

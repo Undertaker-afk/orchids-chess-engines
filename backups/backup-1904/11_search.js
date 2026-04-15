@@ -153,16 +153,12 @@ function search(depth, alpha, beta, is_pv, prev_move) {
             if (static_eval + futility_margins[depth] < alpha) continue;
         }
 
-        if (!make_move(m)) continue;
-
         // Late Move Pruning: cut low-priority quiet moves at shallow depth.
         if (is_quiet && !is_pv && !in_check && depth <= 3) {
-            if (legal > 3 + depth * depth) {
-                unmake_move(m);
-                continue;
-            }
+            if (legal > 3 + depth * depth) continue;
         }
 
+        if (!make_move(m)) continue;
         legal++;
         let score;
 
@@ -203,9 +199,8 @@ function search(depth, alpha, beta, is_pv, prev_move) {
                     killers[kidx] = m;
                     const hkey = ((m & 127) << 7) | ((m >> 7) & 127);
                     history[hkey] += depth * depth;
-                    if (history[hkey] > 1000000) {
-                        for (let k = 0; k < 16384; k++) history[k] >>= 2;
-                    }
+                    // Saturating clamp avoids O(N) table decay in this hot path.
+                    if (history[hkey] > 32000) history[hkey] = 16000;
                     if (prev_move) {
                         const cm_key = ((prev_move & 127) << 7) | ((prev_move >> 7) & 127);
                         countermove[cm_key] = m;
@@ -218,11 +213,6 @@ function search(depth, alpha, beta, is_pv, prev_move) {
 
     // Checkmate or stalemate
     if (legal === 0) return in_check ? -30000 + ply : 0;
-
-    // Contempt factor: reduce drawish tendencies in quiet non-PV nodes.
-    if (!in_check && !is_pv && Math.abs(best_score) < 2000) {
-        best_score -= 15;
-    }
 
     // Store in TT
     let flag = TT_EXACT;

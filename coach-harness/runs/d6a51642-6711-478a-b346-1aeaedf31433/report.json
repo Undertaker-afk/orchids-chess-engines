@@ -1,0 +1,162 @@
+{
+  "id": "d6a51642-6711-478a-b346-1aeaedf31433",
+  "status": "running",
+  "fen": "rnb1k2r/pp3ppp/4pq2/3p4/1b1p4/2N1PN2/PPPQ1PPP/R3KB1R w KQkq - 0 8",
+  "ply": 14,
+  "result": "*",
+  "winner": "Unknown",
+  "trinityMoves": [
+    "d2d4",
+    "b1c3",
+    "g1f3",
+    "c1g5",
+    "g5f6",
+    "e2e3",
+    "d1d2"
+  ],
+  "stockfishMoves": [
+    "g8f6",
+    "d7d5",
+    "e7e6",
+    "f8b4",
+    "d8f6",
+    "c7c5",
+    "c5d4"
+  ],
+  "moves": [
+    {
+      "ply": 1,
+      "fenBefore": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "fenAfter": "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1",
+      "moveUci": "d2d4",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T17:38:32.783Z"
+    },
+    {
+      "ply": 2,
+      "fenBefore": "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1",
+      "fenAfter": "rnbqkb1r/pppppppp/5n2/8/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 1 2",
+      "moveUci": "g8f6",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T17:38:33.994Z"
+    },
+    {
+      "ply": 3,
+      "fenBefore": "rnbqkb1r/pppppppp/5n2/8/3P4/8/PPP1PPPP/RNBQKBNR w KQkq - 1 2",
+      "fenAfter": "rnbqkb1r/pppppppp/5n2/8/3P4/2N5/PPP1PPPP/R1BQKBNR b KQkq - 2 2",
+      "moveUci": "b1c3",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T17:38:36.318Z"
+    },
+    {
+      "ply": 4,
+      "fenBefore": "rnbqkb1r/pppppppp/5n2/8/3P4/2N5/PPP1PPPP/R1BQKBNR b KQkq - 2 2",
+      "fenAfter": "rnbqkb1r/ppp1pppp/5n2/3p4/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq - 0 3",
+      "moveUci": "d7d5",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T17:38:37.524Z"
+    },
+    {
+      "ply": 5,
+      "fenBefore": "rnbqkb1r/ppp1pppp/5n2/3p4/3P4/2N5/PPP1PPPP/R1BQKBNR w KQkq - 0 3",
+      "fenAfter": "rnbqkb1r/ppp1pppp/5n2/3p4/3P4/2N2N2/PPP1PPPP/R1BQKB1R b KQkq - 1 3",
+      "moveUci": "g1f3",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T17:38:39.146Z"
+    },
+    {
+      "ply": 6,
+      "fenBefore": "rnbqkb1r/ppp1pppp/5n2/3p4/3P4/2N2N2/PPP1PPPP/R1BQKB1R b KQkq - 1 3",
+      "fenAfter": "rnbqkb1r/ppp2ppp/4pn2/3p4/3P4/2N2N2/PPP1PPPP/R1BQKB1R w KQkq - 0 4",
+      "moveUci": "e7e6",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T17:38:40.353Z"
+    },
+    {
+      "ply": 7,
+      "fenBefore": "rnbqkb1r/ppp2ppp/4pn2/3p4/3P4/2N2N2/PPP1PPPP/R1BQKB1R w KQkq - 0 4",
+      "fenAfter": "rnbqkb1r/ppp2ppp/4pn2/3p2B1/3P4/2N2N2/PPP1PPPP/R2QKB1R b KQkq - 1 4",
+      "moveUci": "c1g5",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T17:38:42.157Z"
+    },
+    {
+      "ply": 8,
+      "fenBefore": "rnbqkb1r/ppp2ppp/4pn2/3p2B1/3P4/2N2N2/PPP1PPPP/R2QKB1R b KQkq - 1 4",
+      "fenAfter": "rnbqk2r/ppp2ppp/4pn2/3p2B1/1b1P4/2N2N2/PPP1PPPP/R2QKB1R w KQkq - 2 5",
+      "moveUci": "f8b4",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T17:38:43.365Z"
+    },
+    {
+      "ply": 9,
+      "fenBefore": "rnbqk2r/ppp2ppp/4pn2/3p2B1/1b1P4/2N2N2/PPP1PPPP/R2QKB1R w KQkq - 2 5",
+      "fenAfter": "rnbqk2r/ppp2ppp/4pB2/3p4/1b1P4/2N2N2/PPP1PPPP/R2QKB1R b KQkq - 0 5",
+      "moveUci": "g5f6",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T17:38:45.088Z"
+    },
+    {
+      "ply": 10,
+      "fenBefore": "rnbqk2r/ppp2ppp/4pB2/3p4/1b1P4/2N2N2/PPP1PPPP/R2QKB1R b KQkq - 0 5",
+      "fenAfter": "rnb1k2r/ppp2ppp/4pq2/3p4/1b1P4/2N2N2/PPP1PPPP/R2QKB1R w KQkq - 0 6",
+      "moveUci": "d8f6",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T17:38:46.295Z"
+    },
+    {
+      "ply": 11,
+      "fenBefore": "rnb1k2r/ppp2ppp/4pq2/3p4/1b1P4/2N2N2/PPP1PPPP/R2QKB1R w KQkq - 0 6",
+      "fenAfter": "rnb1k2r/ppp2ppp/4pq2/3p4/1b1P4/2N1PN2/PPP2PPP/R2QKB1R b KQkq - 0 6",
+      "moveUci": "e2e3",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T17:39:02.942Z"
+    },
+    {
+      "ply": 12,
+      "fenBefore": "rnb1k2r/ppp2ppp/4pq2/3p4/1b1P4/2N1PN2/PPP2PPP/R2QKB1R b KQkq - 0 6",
+      "fenAfter": "rnb1k2r/pp3ppp/4pq2/2pp4/1b1P4/2N1PN2/PPP2PPP/R2QKB1R w KQkq - 0 7",
+      "moveUci": "c7c5",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T17:39:04.169Z"
+    },
+    {
+      "ply": 13,
+      "fenBefore": "rnb1k2r/pp3ppp/4pq2/2pp4/1b1P4/2N1PN2/PPP2PPP/R2QKB1R w KQkq - 0 7",
+      "fenAfter": "rnb1k2r/pp3ppp/4pq2/2pp4/1b1P4/2N1PN2/PPPQ1PPP/R3KB1R b KQkq - 1 7",
+      "moveUci": "d1d2",
+      "engine": "Trinity",
+      "legal": true,
+      "timestamp": "2026-04-15T17:39:06.111Z"
+    },
+    {
+      "ply": 14,
+      "fenBefore": "rnb1k2r/pp3ppp/4pq2/2pp4/1b1P4/2N1PN2/PPPQ1PPP/R3KB1R b KQkq - 1 7",
+      "fenAfter": "rnb1k2r/pp3ppp/4pq2/3p4/1b1p4/2N1PN2/PPPQ1PPP/R3KB1R w KQkq - 0 8",
+      "moveUci": "c5d4",
+      "engine": "Stockfish",
+      "legal": true,
+      "timestamp": "2026-04-15T17:39:07.318Z"
+    }
+  ],
+  "insights": [
+    {
+      "ply": 10,
+      "timestamp": "2026-04-15T17:39:01.275Z",
+      "summary": "**1) Style notes**\n- ✓ Solid opening knowledge - you executed the QGD Exchange Variation correctly\n- ✓ Good piece activity - knights on natural squares, queen influencing the center\n- ✓ Prophylactic thinking evident in 7.Bg5, preventing Black's natural development\n- ⚠ Minor: 9.Bxf6 was the only move, not a \"plan\" - make sure engine isn't overvaluing obvious trades\n- ⚠ Could explore 7.c4 (Alekhine Gambit style) to challenge Black's center more actively\n\n**2) Tactical warning**\n- After 10...Qf6, Black's queen and knight occupy the same file as White's rook on h1. With castling still available, White has a potential initiative along the h-file if Black castles kingside. Watch for tactics involving Rh1-h3-h1+ patterns.\n- Black's queen on f6 is slightly exposed - could be a target after eventual castling if Black doesn't reposition it.\n\n**3) Concrete tuning idea**\nYour engine shows good positional awareness but may undervalue **pawn structure weaknesses**. Consider slightly increasing the weight for:\n- Isolated pawns (d5 pawn in this position)\n- Backward pawns on half-open files\n- Doubled pawns\n\nThis position offers a small edge to White, but your current evaluation may be too optimistic or pessimistic depending on how the engine weights piece activity vs. structure."
+    }
+  ],
+  "startedAt": "2026-04-15T17:38:31.098Z"
+}

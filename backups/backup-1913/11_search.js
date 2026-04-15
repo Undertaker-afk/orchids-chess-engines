@@ -219,11 +219,6 @@ function search(depth, alpha, beta, is_pv, prev_move) {
     // Checkmate or stalemate
     if (legal === 0) return in_check ? -30000 + ply : 0;
 
-    // Contempt factor: reduce drawish tendencies in quiet non-PV nodes.
-    if (!in_check && !is_pv && Math.abs(best_score) < 2000) {
-        best_score -= 15;
-    }
-
     // Store in TT
     let flag = TT_EXACT;
     if (best_score <= alpha_orig) flag = TT_UPPER;

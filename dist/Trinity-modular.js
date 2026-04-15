@@ -842,7 +842,8 @@ function eval_pawns_raw() {
             }
             if (passed) {
                 const rank_val = color === WHITE ? r : (7 - r);
-                score += (10 + rank_val * rank_val * 3) * sign;
+                score += (20 + rank_val * rank_val * 5) * sign;
+                if (rank_val >= 5) score += 40 * sign;
             }
         }
     }
@@ -869,7 +870,7 @@ const ATK_WEIGHT = [0, 0, 2, 2, 3, 5, 0]; // index = piece type
 
 function eval_king_safety() {
     // In endgames, king activity is more important than king shelter.
-    if (phase < 12) return 0;
+    if (phase < 10) return 0;
 
     let score = 0;
     for (const color of [WHITE, BLACK]) {
@@ -968,18 +969,22 @@ function eval_pieces() {
                 if (p === (PAWN | color))        own_pawn   = true;
                 if (p === (PAWN | (color ^ 24))) enemy_pawn = true;
             }
-            if (!own_pawn && !enemy_pawn) score += 20 * sign; // open file
-            else if (!own_pawn)           score += 10 * sign; // semi-open
+            if (!own_pawn && !enemy_pawn) score += 25 * sign; // open file
+            else if (!own_pawn)           score += 12 * sign; // semi-open
 
-            // Bonus for active rook on the 7th rank (2nd rank for black).
-            const seventh_rank = color === WHITE ? 6 : 1;
-            if (r === seventh_rank) score += 15 * sign;
+            // 7th rank bonus: force rooks to invade and pressure king/pawns.
+            if (color === WHITE && r === 6) score += 25;
+            if (color === BLACK && r === 1) score -= 25;
+
+            // Rook lift bonus (3rd rank for white, 6th rank for black).
+            const lift = color === WHITE ? 2 : 5;
+            if (r === lift) score += 8 * sign;
         }
     }
 
     // Bishop pair bonus
-    if (white_bishops >= 2) score += 30;
-    if (black_bishops >= 2) score -= 30;
+    if (white_bishops >= 2) score += 35;
+    if (black_bishops >= 2) score -= 35;
 
     return score;
 }
@@ -1009,11 +1014,15 @@ function eval_mobility() {
             }
         }
 
-        // Penalize trapped/passive pieces with too little mobility.
-        if (mob <= 1) {
-            score -= 25 * sign;
-        } else if (type === BISHOP && mob <= 2) {
-            score -= 15 * sign;
+        // HARD penalty for trapped pieces.
+        if (mob <= 1) score -= 35 * sign;
+        else if (type === BISHOP && mob <= 3) score -= 18 * sign;
+
+        // Knight outpost bonus (4th/5th rank for white, 4th/5th from black side).
+        if (type === KNIGHT) {
+            const r = sq >> 4;
+            const is_outpost = (color === WHITE && r >= 4 && r <= 5) || (color === BLACK && r >= 2 && r <= 3);
+            if (is_outpost) score += 10 * sign;
         }
 
         // Mobility bonuses relative to expected value (normalise around typical counts)
@@ -1029,26 +1038,32 @@ function eval_mobility() {
 // Endgame Mop-up (push losing king to corner)
 // ---------------------------------------------------------------------------
 function eval_mopup() {
-    if (phase > 6) return 0; // Only in true endgame
+    if (phase > 8) return 0; // Only in true endgame
     if (Math.abs(eval_mg) < 200) return 0; // Only with decisive material advantage
 
     const winning  = eval_mg > 0 ? WHITE : BLACK;
     const losing   = winning ^ 24;
     const sign     = winning === WHITE ? 1 : -1;
 
-    const lk_sq    = king_sq[losing  === WHITE ? 0 : 1];
     const wk_sq    = king_sq[winning === WHITE ? 0 : 1];
+    const lk_sq    = king_sq[losing  === WHITE ? 0 : 1];
     if (!lk_sq || !wk_sq) return 0;
 
     const lk_f = lk_sq & 7, lk_r = lk_sq >> 4;
     const wk_f = wk_sq & 7, wk_r = wk_sq >> 4;
 
-    // Push losing king to edge/corner
-    const center_dist = Math.max(Math.abs(lk_f - 3), Math.abs(lk_r - 3));
-    // Winning king should approach losing king
-    const king_dist = Math.abs(wk_f - lk_f) + Math.abs(wk_r - lk_r);
+    // Push losing king to edge/corner.
+    const center_dist_losing = Math.max(Math.abs(lk_f - 3.5), Math.abs(lk_r - 3.5));
 
-    return sign * (center_dist * 10 + (14 - king_dist) * 4);
+    // Reward winning king for centralization.
+    const dist_to_center = Math.abs(wk_f - 3.5) + Math.abs(wk_r - 3.5);
+    const king_activity_bonus = Math.max(0, 10 - dist_to_center) * 6;
+
+    // Winning king should approach losing king.
+    const king_dist = Math.abs(wk_f - lk_f) + Math.abs(wk_r - lk_r);
+    const chase_bonus = (14 - king_dist) * 4;
+
+    return sign * (center_dist_losing * 12 + king_activity_bonus + chase_bonus);
 }
 
 // ---------------------------------------------------------------------------
@@ -1063,9 +1078,19 @@ function evaluate() {
     const mob_score    = eval_mobility();
     const piece_bonus  = eval_pieces();
     const mopup        = eval_mopup();
+    let king_central = 0;
+    if (phase < 14) {
+        const wk = king_sq[0], bk = king_sq[1];
+        if (wk && bk) {
+            const w_dist = Math.abs((wk & 7) - 3.5) + Math.abs((wk >> 4) - 3.5);
+            const b_dist = Math.abs((bk & 7) - 3.5) + Math.abs((bk >> 4) - 3.5);
+            const scale = (14 - phase) / 14;
+            king_central = ((10 - w_dist) - (10 - b_dist)) * 4 * scale;
+        }
+    }
     const tempo        = 10; // Bonus for side to move
 
-    const total = piece_score + pawn_score + king_score + mob_score + piece_bonus + mopup + tempo;
+    const total = piece_score + pawn_score + king_score + mob_score + piece_bonus + mopup + king_central + tempo;
     return side === WHITE ? total : -total;
 }
 
@@ -1296,6 +1321,15 @@ function search(depth, alpha, beta, is_pv, prev_move) {
         }
 
         if (!make_move(m)) continue;
+
+        // Late Move Pruning: cut low-priority quiet moves at shallow depth.
+        if (is_quiet && !is_pv && !in_check && depth <= 3) {
+            if (legal > 3 + depth * depth) {
+                unmake_move(m);
+                continue;
+            }
+        }
+
         legal++;
         let score;
 
@@ -1336,8 +1370,9 @@ function search(depth, alpha, beta, is_pv, prev_move) {
                     killers[kidx] = m;
                     const hkey = ((m & 127) << 7) | ((m >> 7) & 127);
                     history[hkey] += depth * depth;
-                    // Saturating clamp avoids O(N) table decay in this hot path.
-                    if (history[hkey] > 32000) history[hkey] = 16000;
+                    if (history[hkey] > 1000000) {
+                        for (let k = 0; k < 16384; k++) history[k] >>= 2;
+                    }
                     if (prev_move) {
                         const cm_key = ((prev_move & 127) << 7) | ((prev_move >> 7) & 127);
                         countermove[cm_key] = m;
@@ -1350,6 +1385,11 @@ function search(depth, alpha, beta, is_pv, prev_move) {
 
     // Checkmate or stalemate
     if (legal === 0) return in_check ? -30000 + ply : 0;
+
+    // Contempt factor: reduce drawish tendencies in quiet non-PV nodes.
+    if (!in_check && !is_pv && Math.abs(best_score) < 2000) {
+        best_score -= 15;
+    }
 
     // Store in TT
     let flag = TT_EXACT;

@@ -53,8 +53,22 @@ function eval_pawns_raw() {
             }
             if (passed) {
                 const rank_val = color === WHITE ? r : (7 - r);
-                score += (20 + rank_val * rank_val * 5) * sign;
-                if (rank_val >= 5) score += 40 * sign;
+                // Dynamic passed-pawn bonus: advancement, blockage, and enemy king proximity.
+                let pp_score = 15 + rank_val * rank_val * 4;
+
+                const block_sq = color === WHITE ? sq + 16 : sq - 16;
+                if (!(block_sq & 0x88) && board[block_sq]) {
+                    pp_score -= 15;
+                }
+
+                const e_ksq = king_sq[(color ^ 24) === WHITE ? 0 : 1];
+                if (e_ksq) {
+                    const k_dist = Math.abs((e_ksq & 7) - f) + Math.abs((e_ksq >> 4) - r);
+                    // Closer enemy king makes the passer less dangerous.
+                    pp_score -= Math.max(0, 6 - k_dist) * 5;
+                }
+
+                score += pp_score * sign;
             }
         }
     }
@@ -183,19 +197,15 @@ function eval_pieces() {
             if (!own_pawn && !enemy_pawn) score += 25 * sign; // open file
             else if (!own_pawn)           score += 12 * sign; // semi-open
 
-            // 7th rank bonus: force rooks to invade and pressure king/pawns.
-            if (color === WHITE && r === 6) score += 25;
-            if (color === BLACK && r === 1) score -= 25;
-
-            // Rook lift bonus (3rd rank for white, 6th rank for black).
-            const lift = color === WHITE ? 2 : 5;
-            if (r === lift) score += 8 * sign;
+            // Bonus for active rook on the 7th rank (2nd rank for black).
+            const seventh_rank = color === WHITE ? 6 : 1;
+            if (r === seventh_rank) score += 20 * sign;
         }
     }
 
     // Bishop pair bonus
-    if (white_bishops >= 2) score += 35;
-    if (black_bishops >= 2) score -= 35;
+    if (white_bishops >= 2) score += 30;
+    if (black_bishops >= 2) score -= 30;
 
     return score;
 }
@@ -225,16 +235,12 @@ function eval_mobility() {
             }
         }
 
-        // HARD penalty for trapped pieces.
+        // HARD penalty for completely trapped pieces.
         if (mob <= 1) score -= 35 * sign;
-        else if (type === BISHOP && mob <= 3) score -= 18 * sign;
-
-        // Knight outpost bonus (4th/5th rank for white, 4th/5th from black side).
-        if (type === KNIGHT) {
-            const r = sq >> 4;
-            const is_outpost = (color === WHITE && r >= 4 && r <= 5) || (color === BLACK && r >= 2 && r <= 3);
-            if (is_outpost) score += 10 * sign;
-        }
+        // MEDIUM penalty for restricted bishops.
+        else if (type === BISHOP && mob <= 3) score -= 15 * sign;
+        // Queen activity penalty in middlegames.
+        else if (type === QUEEN && mob < 10 && phase > 12) score -= (10 - mob) * 5 * sign;
 
         // Mobility bonuses relative to expected value (normalise around typical counts)
         if      (type === KNIGHT) score += (mob - 4) * 4 * sign;
@@ -289,18 +295,8 @@ function evaluate() {
     const mob_score    = eval_mobility();
     const piece_bonus  = eval_pieces();
     const mopup        = eval_mopup();
-    let king_central = 0;
-    if (phase < 14) {
-        const wk = king_sq[0], bk = king_sq[1];
-        if (wk && bk) {
-            const w_dist = Math.abs((wk & 7) - 3.5) + Math.abs((wk >> 4) - 3.5);
-            const b_dist = Math.abs((bk & 7) - 3.5) + Math.abs((bk >> 4) - 3.5);
-            const scale = (14 - phase) / 14;
-            king_central = ((10 - w_dist) - (10 - b_dist)) * 4 * scale;
-        }
-    }
     const tempo        = 10; // Bonus for side to move
 
-    const total = piece_score + pawn_score + king_score + mob_score + piece_bonus + mopup + king_central + tempo;
+    const total = piece_score + pawn_score + king_score + mob_score + piece_bonus + mopup + tempo;
     return side === WHITE ? total : -total;
 }
