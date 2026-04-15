@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { basename, dirname, extname, join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -14,7 +14,6 @@ import {
   parseFen,
   sqToIdx,
 } from './src/dojo_chess.mjs';
-import { compileAgent, getMoveFromFn, resetAgentCache } from './src/dojo_runtime.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DEFAULT_COACH = resolve(__dirname, 'engines', 'stockfish_single_shot.mjs');
@@ -237,40 +236,7 @@ function runSpawnEngine(spec, fen, timeoutMs) {
   }
 }
 
-function shouldAttemptCompile(spec) {
-  if (spec.kind !== 'file' || !/\.(?:js|mjs|cjs)$/i.test(spec.filePath)) return false;
-  try {
-    const source = readFileSync(spec.filePath, 'utf8');
-    return !source.includes('import.meta');
-  } catch {
-    return false;
-  }
-}
-
-function canUseProbeMove(move, fen) {
-  if (!UCI_RE.test(move)) return false;
-  const legalMoves = generateLegalMoves(parseFen(fen));
-  return legalMoves.includes(move);
-}
-
-function loadEngine(spec, timeoutMs, preferCompile = true, probeFen = START_FEN) {
-  if (preferCompile && shouldAttemptCompile(spec)) {
-    resetAgentCache(spec.filePath);
-    const fn = compileAgent(spec.filePath, { forceReload: true });
-    if (fn) {
-      const probe = getMoveFromFn(fn, probeFen);
-      if (canUseProbeMove(probe.move, probeFen)) {
-        return {
-          ...spec,
-          mode: 'compiled',
-          getMove(fen) {
-            return getMoveFromFn(fn, fen);
-          },
-        };
-      }
-    }
-  }
-
+function loadEngine(spec, timeoutMs) {
   return {
     ...spec,
     mode: 'spawn',
@@ -659,9 +625,9 @@ function main() {
   console.log(`  games:     ${options.games}`);
   console.log('');
 
-  const student = loadEngine(options.student, options.timeoutMs, true, options.startFen);
-  const coach = loadEngine(options.coach, options.coachTimeoutMs, true, options.startFen);
-  const opponents = options.opponents.map((item) => loadEngine(item, options.timeoutMs, true, options.startFen));
+  const student = loadEngine(options.student, options.timeoutMs);
+  const coach = loadEngine(options.coach, options.coachTimeoutMs);
+  const opponents = options.opponents.map((item) => loadEngine(item, options.timeoutMs));
 
   console.log(`Loaded student via ${student.mode}`);
   console.log(`Loaded coach via ${coach.mode}`);

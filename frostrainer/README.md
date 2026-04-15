@@ -31,7 +31,7 @@ Your engine should:
 - print exactly one legal UCI move on `stdout`
 - exit cleanly
 
-The harness will try to compile JS engines in-process for speed. If that fails, it falls back to spawning the engine as a process.
+The harness only relies on the public process boundary: one FEN on `stdin`, one UCI move on `stdout`, then exit. It does not try to inspect or patch engine internals.
 
 By default, `frostrainer` uses the bundled Stockfish single-shot wrapper at `engines/stockfish_single_shot.mjs` as its coach.
 
@@ -94,7 +94,6 @@ The folder is intentionally self-contained:
 
 - `frostrainer.mjs`
 - `src/dojo_chess.mjs`
-- `src/dojo_runtime.mjs`
 - `package.json`
 
 If you want to hand this to another competitor, they mostly need this folder plus any student/opponent engines that follow the same FEN/UCI single-shot contract. In this repo, the default bundled coach path resolves to Stockfish through `engines/stockfish_single_shot.mjs`.
