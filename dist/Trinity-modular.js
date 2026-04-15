@@ -972,13 +972,13 @@ function eval_pieces() {
             if (!own_pawn && !enemy_pawn) score += 25 * sign; // open file
             else if (!own_pawn)           score += 12 * sign; // semi-open
 
-            // 7th rank bonus: force rooks to invade and pressure king/pawns.
-            if (color === WHITE && r === 6) score += 25;
-            if (color === BLACK && r === 1) score -= 25;
+            const seventh_rank = color === WHITE ? 6 : 1;
+            if (r === seventh_rank) score += 20 * sign;
 
-            // Rook lift bonus (3rd rank for white, 6th rank for black).
-            const lift = color === WHITE ? 2 : 5;
-            if (r === lift) score += 8 * sign;
+            // Bonus for developed rooks on active ranks.
+            if (r >= 3 && r <= 6) score += 10 * sign;
+            // Penalty for back-rank rook stagnation in earlier middlegame.
+            if ((phase < 18) && (r === 0 || r === 7)) score -= 15 * sign;
         }
     }
 
@@ -1014,15 +1014,15 @@ function eval_mobility() {
             }
         }
 
-        // HARD penalty for trapped pieces.
-        if (mob <= 1) score -= 35 * sign;
-        else if (type === BISHOP && mob <= 3) score -= 18 * sign;
+        // Heavy penalty for trapped/passive pieces.
+        if (mob <= 1) score -= 45 * sign;
+        else if (mob <= 2) score -= 15 * sign;
 
-        // Knight outpost bonus (4th/5th rank for white, 4th/5th from black side).
-        if (type === KNIGHT) {
-            const r = sq >> 4;
-            const is_outpost = (color === WHITE && r >= 4 && r <= 5) || (color === BLACK && r >= 2 && r <= 3);
-            if (is_outpost) score += 10 * sign;
+        // Reward centralization for minor pieces.
+        if (type === KNIGHT || type === BISHOP) {
+            const f = sq & 7, r = sq >> 4;
+            const dist_to_center = Math.abs(f - 3.5) + Math.abs(r - 3.5);
+            if (dist_to_center < 3.0) score += 10 * sign;
         }
 
         // Mobility bonuses relative to expected value (normalise around typical counts)
@@ -1090,7 +1090,16 @@ function evaluate() {
     }
     const tempo        = 10; // Bonus for side to move
 
-    const total = piece_score + pawn_score + king_score + mob_score + piece_bonus + mopup + king_central + tempo;
+    let total = piece_score + pawn_score + king_score + mob_score + piece_bonus + mopup + king_central + tempo;
+
+    // Dynamic contempt: discourage passive simplification in complex middlegames.
+    let contempt = 0;
+    const material_approx = Math.abs(eval_mg);
+    if (phase > 12 && phase < 22 && material_approx < 600) {
+        contempt = 8;
+    }
+    total += contempt;
+
     return side === WHITE ? total : -total;
 }
 
@@ -1314,9 +1323,9 @@ function search(depth, alpha, beta, is_pv, prev_move) {
         // SEE-based bad capture pruning in main search
         if (!is_pv && is_capture && depth <= 4 && see(m) < -50 * depth) continue;
 
-        // Futility pruning for quiet moves
-        if (is_quiet && !is_pv && !in_check && depth <= 3) {
-            const futility_margins = [0, 150, 300, 500];
+        // Reduce futility pruning to preserve initiative in middlegames.
+        if (is_quiet && !is_pv && !in_check && depth <= 2 && phase > 10) {
+            const futility_margins = [0, 100, 180];
             if (static_eval + futility_margins[depth] < alpha) continue;
         }
 

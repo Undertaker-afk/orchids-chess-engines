@@ -147,9 +147,9 @@ function search(depth, alpha, beta, is_pv, prev_move) {
         // SEE-based bad capture pruning in main search
         if (!is_pv && is_capture && depth <= 4 && see(m) < -50 * depth) continue;
 
-        // Reduce futility pruning to preserve initiative in middlegames.
-        if (is_quiet && !is_pv && !in_check && depth <= 2 && phase > 10) {
-            const futility_margins = [0, 100, 180];
+        // Futility pruning for quiet moves
+        if (is_quiet && !is_pv && !in_check && depth <= 3) {
+            const futility_margins = [0, 150, 300, 500];
             if (static_eval + futility_margins[depth] < alpha) continue;
         }
 
